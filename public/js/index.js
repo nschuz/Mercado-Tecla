@@ -24,10 +24,16 @@ consultarAPI();
 function recorrerJson(data) {
     for (let i in data) {
         const { id, name } = data[i];
-        insertarOption(name)
+        insertarOption(name, id)
     }
 }
 
-function insertarOption(name) {
+function insertarOption(name, id) {
     console.log(name);
+    const datoSelect = document.createElement('option')
+    datoSelect.innerHTML = name
+    const selector = document.querySelector('#sel1');
+    selector.appendChild(datoSelect)
+
+    // getValor()
 }
