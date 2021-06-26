@@ -2,7 +2,9 @@ const selector = document.querySelector('#sel1');
 const boton = document.querySelector('#boton')
 const resultado1 = document.querySelector('#primeraColumna')
 const resultado2 = document.querySelector('#segundaColumna')
+const resultado3 = document.querySelector('#terceraColumna')
 
+consultarAPI();
 
 document.addEventListener('DOMContentLoaded', () => {
     boton.addEventListener('click', buscarProducto);
@@ -12,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function consultarAPI() {
-
     const url = `https://api.mercadolibre.com/sites/MLM/categories`
     fetch(url)
         .then((res) => res.json())
@@ -23,11 +24,12 @@ function consultarAPI() {
         .catch((err) => console.log(err));
 }
 
-consultarAPI();
+
 
 function recorrerJson(data) {
+
     for (let i in data) {
-        const { id, name } = data[i];
+        const { id, name, } = data[i];
         insertarOption(name, id)
     }
 }
@@ -63,38 +65,51 @@ function consultarProductos(valor) {
 }
 
 function insertarData(data) {
+    console.log(data);
     const { results } = data
     console.log(results);
-    for (let i = 0; i < 8; i++) {
-        const { title, price, thumbnail } = results[i]
-        console.log(title);
-        console.log(price)
-        console.log(thumbnail);
+    let i = 0;
+    while (i < 12) {
+        random = Math.round(getRandomArbitrary(0, 49))
+        console.log(random);
+        const { title, price, thumbnail, available_quantity } = results[random]
+
         if (i < 4) {
-            construccionCard(title, price, thumbnail, "#primeraColumna")
+            construccionCard(title, price, thumbnail, available_quantity, "#primeraColumna")
+        } else if (i >= 4 && i < 8) {
+            construccionCard(title, price, thumbnail, available_quantity, "#segundaColumna")
         } else {
-            construccionCard(title, price, thumbnail, "#segundaColumna")
+            construccionCard(title, price, thumbnail, available_quantity, "#terceraColumna ")
+                //132 × 141 px
         }
+        i++;
     }
 
 }
 
 
-function construccionCard(title, price, thumbnail, div) {
+function construccionCard(title, price, thumbnail, available_quantity, div) {
 
     const padre = document.querySelector(div)
 
     const divCol = document.createElement('div');
     divCol.className = "col"
+        //divCol.setAttribute("width", "150")
+        //   divCol.setAttribute("style", "height: 465px")
+
 
     const divCard = document.createElement('div');
     divCard.className = "card"
     divCol.appendChild(divCard)
     divCard.setAttribute("style", "width: 16 rem;")
+        //divCard.setAttribute("style", "height: 465px")
+        //divCard.setAttribute("style", "height: 465px;")
 
     const img = document.createElement('img')
     img.className = "card-img-top"
     img.setAttribute("src", thumbnail)
+        //img.setAttribute("width", "132")
+        //img.setAttribute("height", "141")
     divCard.appendChild(img)
 
     const divCard_hijo = document.createElement('div');
@@ -110,6 +125,11 @@ function construccionCard(title, price, thumbnail, div) {
     precio.className = "card-text"
     precio.innerHTML = `Precio:  $ ${price}`
     divCard_hijo.appendChild(precio)
+
+    const cantidad = document.createElement('p');
+    cantidad.className = "card-text"
+    cantidad.innerHTML = `Cantidad: ${available_quantity}`
+    divCard_hijo.appendChild(cantidad)
 
 
     const logoCompra = document.createElement('div')
@@ -133,8 +153,14 @@ function construccionCard(title, price, thumbnail, div) {
 
 
 function limpiarhtml() {
-    while (resultado1.firstChild && resultado2.firstChild) {
+    while (resultado1.firstChild && resultado2.firstChild && resultado3.firstChild) {
         resultado1.removeChild(resultado1.firstChild);
         resultado2.removeChild(resultado2.firstChild);
+        resultado3.removeChild(resultado3.firstChild);
     }
+}
+
+
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
 }
