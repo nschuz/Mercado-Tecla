@@ -1,5 +1,9 @@
 .productImage {
     margin: 10px;
-    width: 150px; /* you can use % */
-    height: auto;
+    width: auto; /* you can use % */
+    height: 150px;
+}
+
+.row {
+    margin-bottom: 10px;
 }
