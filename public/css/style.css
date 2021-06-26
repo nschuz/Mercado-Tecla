@@ -1,4 +1,5 @@
 .productImage {
+    margin: 10px;
     width: 150px; /* you can use % */
     height: auto;
 }
