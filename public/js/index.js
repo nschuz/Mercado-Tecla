@@ -1,23 +1,34 @@
 const boton = document.querySelector('#boton')
 
+//Endpoints
+const URL_TENDENCIAS = `https://api.mercadolibre.com/trends/MLA`;
+const URL_CATEGORIAS = `https://api.mercadolibre.com/sites/MLM/categories`
+const URL_PRODUCTOS = `https://api.mercadolibre.com/sites/MLM/search?category=`;
 
-consultarApiTendencias()
-consultarAPI();
+//consultamos las 10 tendencias y las categorias
+consultarAPI(URL_TENDENCIAS, insertarTendencias)
+consultarAPI(URL_CATEGORIAS, insertarOption)
+
 document.addEventListener('DOMContentLoaded', () => {
     boton.addEventListener('click', buscarProducto);
 
 });
 
-function consultarApiTendencias() {
-    const url = `https://api.mercadolibre.com/trends/MLA`;
+
+//Funcion que consulta la api usando fetch
+function consultarAPI(url, callback, valor_defecto = null) {
+    if (valor_defecto != null)
+        url = url + valor_defecto;
+
     fetch(url)
         .then((res) => res.json())
         .then(data => {
-            insertarTendencias(data)
+            callback(data)
         })
         .catch(err => console.log(err));
 }
 
+//Inserta las top 10 tendencias de mercado libre
 function insertarTendencias(data) {
     let derecha = document.querySelector('#tendencia1')
     let izquierda = document.querySelector('#tendencia2')
@@ -36,63 +47,37 @@ function insertarTendencias(data) {
 
 }
 
-
-function consultarAPI() {
-    const url = `https://api.mercadolibre.com/sites/MLM/categories`
-    fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-            recorrerJson(data)
-            return data
-        })
-        .catch((err) => console.log(err));
-}
-
-
-
-function recorrerJson(data) {
+//Cargamos las tendencias en los options dentro del select 
+function insertarOption(data) {
     for (let i in data) {
         const { id, name, } = data[i];
-        insertarOption(name, id)
+        const datoSelect = document.createElement('option')
+        datoSelect.innerHTML = name
+        datoSelect.value = id
+        const selector = document.querySelector('#sel1');
+        selector.appendChild(datoSelect)
     }
 }
 
-function insertarOption(name, id) {
-    const datoSelect = document.createElement('option')
-    datoSelect.innerHTML = name
-    datoSelect.value = id
-    const selector = document.querySelector('#sel1');
-    selector.appendChild(datoSelect)
-}
-
-
+//Obtenemos el valir del select  y consulta la Api cuando presionamos el boton
 function buscarProducto(e) {
     limpiarhtml();
     e.preventDefault();
     let sel = document.getElementById("sel1");
     let valor = sel.value;
-    consultarProductos(valor);
+    consultarAPI(URL_PRODUCTOS, insertarData, valor);
 
 }
 
-function consultarProductos(valor) {
-    const url = `https://api.mercadolibre.com/sites/MLM/search?category=${valor}`
-    fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-            insertarData(data)
-        })
-        .catch((err) => console.log(err));
 
-}
-
+//Etsan funcion recorre el json con los 12 mejores productos dependiendo la catehorias
 function insertarData(data) {
     console.log(data);
     const { results } = data
     console.log(results);
     let i = 0
     while (i < 12) {
-        random = Math.round(getRandomArbitrary(0, 49))
+        random = getRandomArbitrary(0, 49);
         const { title, price, thumbnail, available_quantity } = results[random]
         if (i < 4) {
             construccionCard(title, price, thumbnail, available_quantity, "#primeraColumna")
@@ -107,7 +92,7 @@ function insertarData(data) {
 
 }
 
-
+//Esta funcion permite construir un card 
 function construccionCard(title, price, thumbnail, available_quantity, div) {
 
     const padre = document.querySelector(div)
@@ -156,12 +141,10 @@ function construccionCard(title, price, thumbnail, available_quantity, div) {
     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
 </svg>`
     logoCompra.appendChild(boton)
-
     padre.appendChild(divCol);
-
 }
 
-
+//cada vezz que presionamos el boton limpiamos los productos 
 function limpiarhtml() {
     const resultado1 = document.querySelector('#primeraColumna')
     const resultado2 = document.querySelector('#segundaColumna')
@@ -173,7 +156,7 @@ function limpiarhtml() {
     }
 }
 
-
+//Funcion que genera un numero random
 function getRandomArbitrary(min, max) {
-    return Math.random() * (max - min) + min;
+    return Math.round(Math.random() * (max - min) + min);
 }
