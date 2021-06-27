@@ -4,13 +4,41 @@ const resultado1 = document.querySelector('#primeraColumna')
 const resultado2 = document.querySelector('#segundaColumna')
 const resultado3 = document.querySelector('#terceraColumna')
 
+consultarApiTendencias()
 consultarAPI();
-
 document.addEventListener('DOMContentLoaded', () => {
     boton.addEventListener('click', buscarProducto);
 
 });
 
+function consultarApiTendencias() {
+    const url = `https://api.mercadolibre.com/trends/MLA`;
+    fetch(url)
+        .then((res) => res.json())
+        .then(data => {
+            //console.log(data);
+            insertarTendencias(data)
+        })
+        .catch(err => console.log(err));
+}
+
+function insertarTendencias(data) {
+    let derecha = document.querySelector('#tendencia1')
+    let izquierda = document.querySelector('#tendencia2')
+    for (let i = 0; i < 10; i++) {
+        let { keyword, url } = data[i]
+        let ancla = document.createElement('a');
+        ancla.className = 'list-group-item list-group-item-action"'
+        ancla.setAttribute("href", url)
+        ancla.innerHTML = `${i+1}.${keyword}`
+        if (i < 5) {
+            derecha.appendChild(ancla)
+        } else {
+            izquierda.appendChild(ancla)
+        }
+    }
+
+}
 
 
 function consultarAPI() {
@@ -35,7 +63,6 @@ function recorrerJson(data) {
 }
 
 function insertarOption(name, id) {
-    //console.log(name);
     const datoSelect = document.createElement('option')
     datoSelect.innerHTML = name
     datoSelect.value = id
@@ -68,7 +95,7 @@ function insertarData(data) {
     console.log(data);
     const { results } = data
     console.log(results);
-    let i = 0;
+    let i = 0
     while (i < 12) {
         random = Math.round(getRandomArbitrary(0, 49))
         console.log(random);
@@ -80,9 +107,9 @@ function insertarData(data) {
             construccionCard(title, price, thumbnail, available_quantity, "#segundaColumna")
         } else {
             construccionCard(title, price, thumbnail, available_quantity, "#terceraColumna ")
-                //132 × 141 px
         }
         i++;
+
     }
 
 }
@@ -94,22 +121,16 @@ function construccionCard(title, price, thumbnail, available_quantity, div) {
 
     const divCol = document.createElement('div');
     divCol.className = "col"
-        //divCol.setAttribute("width", "150")
-        //   divCol.setAttribute("style", "height: 465px")
-
 
     const divCard = document.createElement('div');
     divCard.className = "card"
     divCol.appendChild(divCard)
     divCard.setAttribute("style", "width: 16 rem;")
-        //divCard.setAttribute("style", "height: 465px")
-        //divCard.setAttribute("style", "height: 465px;")
+
 
     const img = document.createElement('img')
     img.className = "card-img-top"
     img.setAttribute("src", thumbnail)
-        //img.setAttribute("width", "132")
-        //img.setAttribute("height", "141")
     divCard.appendChild(img)
 
     const divCard_hijo = document.createElement('div');
@@ -142,10 +163,6 @@ function construccionCard(title, price, thumbnail, available_quantity, div) {
     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
 </svg>`
     logoCompra.appendChild(boton)
-
-
-
-
 
     padre.appendChild(divCol);
 
