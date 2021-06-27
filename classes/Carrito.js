@@ -41,17 +41,3 @@ class Carrito {
         return total;
     }
 }
-
-
-const bata = new Producto('bata', 55, 3);
-const cd = new Producto('cd', 10, 1);
-const dvd = new Producto('dvd', 5, 3);
-
-let productos = [bata, cd];
-const carrito = new Carrito(55, productos)
-
-carrito.addProducto(dvd)
-carrito.removeProducto(bata);
-carrito.addCantidad(cd)
-
-console.log(carrito);
