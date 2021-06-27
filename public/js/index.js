@@ -1,8 +1,5 @@
-const selector = document.querySelector('#sel1');
 const boton = document.querySelector('#boton')
-const resultado1 = document.querySelector('#primeraColumna')
-const resultado2 = document.querySelector('#segundaColumna')
-const resultado3 = document.querySelector('#terceraColumna')
+
 
 consultarApiTendencias()
 consultarAPI();
@@ -16,7 +13,6 @@ function consultarApiTendencias() {
     fetch(url)
         .then((res) => res.json())
         .then(data => {
-            //console.log(data);
             insertarTendencias(data)
         })
         .catch(err => console.log(err));
@@ -30,7 +26,7 @@ function insertarTendencias(data) {
         let ancla = document.createElement('a');
         ancla.className = 'list-group-item list-group-item-action"'
         ancla.setAttribute("href", url)
-        ancla.innerHTML = `${i+1}.${keyword}`
+        ancla.innerHTML = `${i+1}. ${keyword}`
         if (i < 5) {
             derecha.appendChild(ancla)
         } else {
@@ -55,7 +51,6 @@ function consultarAPI() {
 
 
 function recorrerJson(data) {
-
     for (let i in data) {
         const { id, name, } = data[i];
         insertarOption(name, id)
@@ -98,9 +93,7 @@ function insertarData(data) {
     let i = 0
     while (i < 12) {
         random = Math.round(getRandomArbitrary(0, 49))
-        console.log(random);
         const { title, price, thumbnail, available_quantity } = results[random]
-
         if (i < 4) {
             construccionCard(title, price, thumbnail, available_quantity, "#primeraColumna")
         } else if (i >= 4 && i < 8) {
@@ -137,8 +130,8 @@ function construccionCard(title, price, thumbnail, available_quantity, div) {
     divCard_hijo.className = "card-body"
     divCard.appendChild(divCard_hijo)
 
-    const titulo = document.createElement('h5');
-    titulo.className = "card-title"
+    const titulo = document.createElement('h6');
+    titulo.className = "card-subtitle mb-2 "
     titulo.innerHTML = title
     divCard_hijo.appendChild(titulo)
 
@@ -170,6 +163,9 @@ function construccionCard(title, price, thumbnail, available_quantity, div) {
 
 
 function limpiarhtml() {
+    const resultado1 = document.querySelector('#primeraColumna')
+    const resultado2 = document.querySelector('#segundaColumna')
+    const resultado3 = document.querySelector('#terceraColumna')
     while (resultado1.firstChild && resultado2.firstChild && resultado3.firstChild) {
         resultado1.removeChild(resultado1.firstChild);
         resultado2.removeChild(resultado2.firstChild);
