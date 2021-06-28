@@ -1,5 +1,5 @@
 class Cliente {
-    constructor(id, nombre, apPaterno, apMaterno, direccion, telefono, email) {
+    constructor(nombre, apPaterno, apMaterno, direccion, telefono, email) {
         this.id = this.generateId();
         this.nombre = nombre;
         this.apPaterno = apPaterno;
