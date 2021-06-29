@@ -1,8 +1,11 @@
 const boton = document.querySelector('#boton')
 
 //Endpoints
+//Endpoint te regresa 50 tendencias
 const URL_TENDENCIAS = `https://api.mercadolibre.com/trends/MLA`;
+//Te regresa todas la categorias de mercado libre
 const URL_CATEGORIAS = `https://api.mercadolibre.com/sites/MLM/categories`
+    //Te regresa los productos dependiendo la categoria 
 const URL_PRODUCTOS = `https://api.mercadolibre.com/sites/MLM/search?category=`;
 
 //consultamos las 10 tendencias y las categorias
