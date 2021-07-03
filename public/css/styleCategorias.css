@@ -1,0 +1,13 @@
+.productImage {
+    margin: 10px;
+    width: auto; /* you can use % */
+    height: 150px;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+.carrito {
+    margin-left: 10px;
+}
