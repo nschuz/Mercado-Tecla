@@ -75,19 +75,19 @@ function buscarProducto(e) {
 
 //Etsan funcion recorre el json con los 12 mejores productos dependiendo la catehorias
 function insertarData(data) {
-    console.log(data);
+    console.log('Data: ', data);
     const { results } = data
     console.log(results);
     let i = 0
     while (i < 12) {
         random = getRandomArbitrary(0, 49);
-        const { title, price, thumbnail, available_quantity } = results[random]
+        const { id, title, price, thumbnail, available_quantity } = results[random]
         if (i < 4) {
-            construccionCard(title, price, thumbnail, available_quantity, "#primeraColumna")
+            construccionCard(id, title, price, thumbnail, available_quantity, "#primeraColumna")
         } else if (i >= 4 && i < 8) {
-            construccionCard(title, price, thumbnail, available_quantity, "#segundaColumna")
+            construccionCard(id, title, price, thumbnail, available_quantity, "#segundaColumna")
         } else {
-            construccionCard(title, price, thumbnail, available_quantity, "#terceraColumna ")
+            construccionCard(id, title, price, thumbnail, available_quantity, "#terceraColumna ")
         }
         i++;
 
@@ -96,8 +96,8 @@ function insertarData(data) {
 }
 
 //Esta funcion permite construir un card 
-function construccionCard(title, price, thumbnail, available_quantity, div) {
-
+function construccionCard(id, title, price, thumbnail, available_quantity, div) {
+    console.log(id);
     const padre = document.querySelector(div)
 
     const divCol = document.createElement('div');
@@ -138,13 +138,18 @@ function construccionCard(title, price, thumbnail, available_quantity, div) {
     logoCompra.className = "d-flex justify-content-end"
     divCard_hijo.appendChild(logoCompra)
 
-    const boton = document.createElement('a');
+    const boton = document.createElement('button');
     boton.className = "btn btn-primary"
     boton.innerHTML = `Add <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-</svg>`
+    </svg>`
+    boton.addEventListener('click', e => {addCarrito(e, id)})
     logoCompra.appendChild(boton)
     padre.appendChild(divCol);
+}
+
+function addCarrito(e, id) {
+    console.log('Uno', id);
 }
 
 //cada vezz que presionamos el boton limpiamos los productos 
@@ -163,3 +168,5 @@ function limpiarhtml() {
 function getRandomArbitrary(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
+
+// Carrito

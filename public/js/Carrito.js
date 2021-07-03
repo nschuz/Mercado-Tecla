@@ -41,3 +41,6 @@ class Carrito {
         return total;
     }
 }
+
+let carrito =  new Carrito();
+console.log(carrito);
