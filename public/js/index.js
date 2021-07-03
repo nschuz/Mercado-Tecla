@@ -1,3 +1,5 @@
+
+
 const boton = document.querySelector('#boton')
 
 //Endpoints
@@ -22,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function consultarAPI(url, callback, valor_defecto = null) {
     if (valor_defecto != null)
         url = url + valor_defecto;
-
     fetch(url)
         .then((res) => res.json())
         .then(data => {
@@ -90,9 +91,7 @@ function insertarData(data) {
             construccionCard(id, title, price, thumbnail, available_quantity, "#terceraColumna ")
         }
         i++;
-
     }
-
 }
 
 //Esta funcion permite construir un card 
