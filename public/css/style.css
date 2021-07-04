@@ -914,3 +914,27 @@ a:focus {
   color: inherit;
 }
 /*# sourceMappingURL=style.css.map */
+
+table .botonMas {
+  color: #fff;
+  background-color: #005007;
+  width: 40px;
+}
+
+table .botonMenos {
+  color: #fff;
+  background-color: #960000;
+  width: 40px;
+}
+
+table .imagenCarrito {
+  width: 80px;
+}
+
+table .carritoVacio {
+  text-align: center;
+}
+
+h4 {
+  text-align: center;
+}

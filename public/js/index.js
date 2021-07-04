@@ -1,4 +1,11 @@
+import { Carrito } from "./Carrito.js";
 
+let productos = []
+
+if (localStorage.getItem('productos')) {
+    productos = JSON.parse(localStorage.getItem('productos'));
+}
+const carrito = new Carrito('un usuario', productos);
 
 const boton = document.querySelector('#boton')
 
@@ -16,7 +23,6 @@ consultarAPI(URL_CATEGORIAS, insertarOption)
 
 document.addEventListener('DOMContentLoaded', () => {
     boton.addEventListener('click', buscarProducto);
-
 });
 
 
@@ -81,7 +87,7 @@ function insertarData(data) {
     console.log(results);
     let i = 0
     while (i < 12) {
-        random = getRandomArbitrary(0, 49);
+        let random = getRandomArbitrary(0, 49);
         const { id, title, price, thumbnail, available_quantity } = results[random]
         if (i < 4) {
             construccionCard(id, title, price, thumbnail, available_quantity, "#primeraColumna")
@@ -96,7 +102,6 @@ function insertarData(data) {
 
 //Esta funcion permite construir un card 
 function construccionCard(id, title, price, thumbnail, available_quantity, div) {
-    console.log(id);
     const padre = document.querySelector(div)
 
     const divCol = document.createElement('div');
@@ -142,13 +147,9 @@ function construccionCard(id, title, price, thumbnail, available_quantity, div) 
     boton.innerHTML = `Add <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
     </svg>`
-    boton.addEventListener('click', e => {addCarrito(e, id)})
+    boton.addEventListener('click', e => {carrito.addProducto(e, id, title, price, thumbnail)})
     logoCompra.appendChild(boton)
     padre.appendChild(divCol);
-}
-
-function addCarrito(e, id) {
-    console.log('Uno', id);
 }
 
 //cada vezz que presionamos el boton limpiamos los productos 
@@ -168,4 +169,3 @@ function getRandomArbitrary(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
 
-// Carrito
