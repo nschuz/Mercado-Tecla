@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Basic -->
     <meta charset="utf-8" />
@@ -11,16 +12,16 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-    
+
     <title>Timups</title>
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     <!--owl slider stylesheet -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    
+
     <!-- font awesome style -->
     <link href="css/font-awesome.min.css" rel="stylesheet" />
-    
+
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
@@ -36,11 +37,11 @@
                 Tecla Mercado
               </span>
                 </a>
-    
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class=""> </span>
             </button>
-    
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -60,8 +61,8 @@
                         <a href="login.html">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </a>
-                        <a href="./cart.html">
-                            <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                        <a id="carrito" href="./cart.html">
+                            <i class="fa fa-cart-plus one" aria-hidden="true"></i>
                         </a>
                         <a>
                             <!--Esto esta mal-->
@@ -81,35 +82,41 @@
         <div class="row">
             <div class="col-md-6">
                 <form>
-                    <div class="form-group"> <!-- Full Name -->
+                    <div class="form-group">
+                        <!-- Full Name -->
                         <label for="full_name_id" class="control-label">Nombre Completo</label>
                         <input type="text" class="form-control" id="full_name_id" name="full_name" placeholder="John Deer">
-                    </div>    
-                
-                    <div class="form-group"> <!-- Street 1 -->
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Street 1 -->
                         <label for="street1_id" class="control-label">Calle</label>
                         <input type="text" class="form-control" id="street1_id" name="street1" placeholder="Benito Juarez #5">
-                    </div>                    
-                                            
-                    <div class="form-group"> <!-- City-->
+                    </div>
+
+                    <div class="form-group">
+                        <!-- City-->
                         <label for="city_id" class="control-label">Colonia</label>
                         <input type="text" class="form-control" id="city_id" name="city" placeholder="Napoles">
                     </div>
-                    
-                    <div class="form-group"> <!-- State-->
+
+                    <div class="form-group">
+                        <!-- State-->
                         <label for="city_id" class="control-label">Estado</label>
                         <input type="text" class="form-control" id="state" name="city" placeholder="Nuevo Leon">
-                    </div>  
-                    
-                    <div class="form-group"> <!-- Codigo postal -->
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Codigo postal -->
                         <label for="zip_id" class="control-label">Codigo postal</label>
                         <input type="text" class="form-control" id="zip_id" name="zip" placeholder="#####">
-                    </div>        
-                    
-                    <div class="form-group"> <!-- Submit Button -->
+                    </div>
+
+                    <div class="form-group">
+                        <!-- Submit Button -->
                         <button type="submit" class="btn btn-primary">Comprar!</button>
-                    </div>     
-                    
+                    </div>
+
                 </form>
 
             </div>
@@ -132,17 +139,17 @@
                 </table>
             </div>
         </div>
-    </main>    
+    </main>
     <footer class="footer_section">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-lg-3 footer-col">
                     <div class="footer_detail">
                         <h4>
-                            About
+                            ¿Quines somos?
                         </h4>
                         <p>
-                            Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+                            Somos una tienda en linea preocupada por la necesidades diarias , con los mejores articulos de tecnologia , hogar y herammientas de cualquier tipo.
                         </p>
                         <div class="footer_social">
                             <a href="">
@@ -163,19 +170,19 @@
                 <div class="col-md-6 col-lg-3 footer-col">
                     <div class="footer_contact">
                         <h4>
-                            Reach at..
+                            Ecuentranos en..
                         </h4>
                         <div class="contact_link_box">
                             <a href="">
                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                                 <span>
-                  Location
+                  Mexico , CDMX
                 </span>
                             </a>
                             <a href="">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                                 <span>
-                  Call +01 1234567890
+                  Call +52 55 10 10 10 10
                 </span>
                             </a>
                             <a href="">
@@ -190,12 +197,12 @@
                 <div class="col-md-6 col-lg-3 footer-col">
                     <div class="footer_contact">
                         <h4>
-                            Subscribe
+                            Subscribete
                         </h4>
                         <form action="#">
                             <input type="text" placeholder="Enter email" />
                             <button type="submit">
-                Subscribe
+                Subscribete
               </button>
                         </form>
                     </div>
@@ -208,14 +215,9 @@
                     </div>
                 </div>
             </div>
-            <div class="footer-info">
-                <p>
-                    &copy; <span id="displayYear"></span> All Rights Reserved By
-                    <a href="https://html.design/">Free Html Templates</a>
-                </p>
-            </div>
         </div>
     </footer>
     <script type="module" src="./js/chechout.js"></script>
 </body>
+
 </html>
