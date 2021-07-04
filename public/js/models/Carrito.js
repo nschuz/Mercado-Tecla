@@ -81,7 +81,7 @@ class Carrito {
 
 /* Se crea la instancia de la clase carrito, tomando como productos los que hay guardados en memoria */
 function creaCarrito () {
-    let productos;
+    let productos = [];
     if (localStorage.getItem('productos')) {
         productos = JSON.parse(localStorage.getItem('productos'));
     }
