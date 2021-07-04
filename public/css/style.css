@@ -947,3 +947,8 @@ h4 {
 body main {
   margin-bottom: 10rem;
 }
+
+#carrito{
+  display: flex;
+}
+

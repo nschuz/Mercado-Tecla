@@ -1,11 +1,4 @@
-import { Carrito } from "./Carrito.js";
-
-let productos = []
-
-if (localStorage.getItem('productos')) {
-    productos = JSON.parse(localStorage.getItem('productos'));
-}
-const carrito = new Carrito('un usuario', productos);
+import { carrito } from "./models/Carrito.js";
 
 const boton = document.querySelector('#boton')
 
