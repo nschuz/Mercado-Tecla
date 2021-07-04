@@ -939,3 +939,7 @@ h4 {
   margin: 2rem;
   text-align: center;
 }
+
+#carritoVacio a {
+  margin: 2rem;
+}
