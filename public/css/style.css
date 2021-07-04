@@ -943,3 +943,7 @@ h4 {
 #carritoVacio a {
   margin: 2rem;
 }
+
+body main {
+  margin-bottom: 10rem;
+}
