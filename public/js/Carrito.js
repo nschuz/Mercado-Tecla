@@ -27,7 +27,8 @@ export class Carrito {
         else 
             this.productos[index].cantidad += 1;    
         console.log(this.productos);
-        localStorage.setItem('productos', JSON.stringify(this.productos))
+        localStorage.setItem('productos', JSON.stringify(this.productos));
+        window.location.replace('cart.html');
     }
 
     addUnProducto(e, id) { //Funcion que incrementa 1 a la cantidad de un elemento en el carrito

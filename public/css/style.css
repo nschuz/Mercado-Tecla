@@ -928,7 +928,7 @@ table .botonMenos {
 }
 
 table .imagenCarrito {
-  width: 80px;
+  width: 4rem;
 }
 
 table .carritoVacio {
@@ -936,5 +936,6 @@ table .carritoVacio {
 }
 
 h4 {
+  margin: 2rem;
   text-align: center;
 }

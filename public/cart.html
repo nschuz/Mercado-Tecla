@@ -1,20 +1,36 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
 
-    <title>Tecla Mercado</title>
+    <title>Timups</title>
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+    <!-- font awesome style -->
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="css/responsive.css" rel="stylesheet" />
 </head>
 
 <body>
-  <header class="header_section">
+
+<header class="header_section">
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
             <a class="navbar-brand" href="index.html">
@@ -36,14 +52,14 @@
                         <a class="nav-link" href="categorias.html"> Tienda </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html"> About </a>
+                        <a class="nav-link" href="about.html"> Sobre nosotros </a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="contact.html">Contact Us <span class="sr-only">(current)</span> </a>
+                        <a class="nav-link" href="contact.html">Contactanos <span class="sr-only">(current)</span> </a>
                     </li>
                 </ul>
                 <div class="user_option-box">
-                    <a href="">
+                    <a href="login.html">
                         <i class="fa fa-user" aria-hidden="true"></i>
                     </a>
                     <a href="./cart.html">
@@ -64,9 +80,9 @@
   
   <main>
       <br>
-      <div class="container">
-          <h4>Carrito de compras</h4>
-          <table class="table" id="table-carrito">
+      <h4>Carrito de compras</h4>
+      <div class="container" id="table-carrito">
+          <table class="table">
             <thead>
               <tr>
                 <th scope="col"></th>
@@ -91,10 +107,13 @@
               </tr>
             </tfoot>
           </table>
+          <div class="text-center">
+            <a class="btn btn-secondary btn-lg" href="./categorias.html">Continuar comprando</a>
+            <a class="btn btn-primary btn-lg" href="./checkout.html">Terminar compra</a>
+          </div>
         </div>
-        <div class="container" id="carritoVacio">
-
-      </div>
+        <div class="container text-center" id="carritoVacio"></div>
+        
   </main>
   
 </body>
