@@ -4,9 +4,10 @@ const boton = document.querySelector('#boton')
 
 //Endpoints
 //Endpoint te regresa 50 tendencias
-const URL_TENDENCIAS = `https://api.mercadolibre.com/trends/MLA`;
+const URL_TENDENCIAS = `https://api-mercado-tecla.herokuapp.com/api/tendencias`;
 //Te regresa todas la categorias de mercado libre
-const URL_CATEGORIAS = `https://api.mercadolibre.com/sites/MLM/categories`
+//`https://api.mercadolibre.com/sites/MLM/categories`
+const URL_CATEGORIAS = `https://api-mercado-tecla.herokuapp.com/api/categorias`
     //Te regresa los productos dependiendo la categoria 
 const URL_PRODUCTOS = `https://api.mercadolibre.com/sites/MLM/search?category=`;
 
@@ -65,6 +66,7 @@ function insertarTendencias(data) {
 
 //Cargamos las tendencias en los options dentro del select 
 function insertarOption(data) {
+    console.log(data)
     for (let i in data) {
         const { id, name, } = data[i];
         const datoSelect = document.createElement('option')
