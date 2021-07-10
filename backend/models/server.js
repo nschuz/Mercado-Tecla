@@ -89,21 +89,27 @@ class Server {
             }
         })
 
-        //https://api.mercadolibre.com/sites/MLM/search
+
 
         this.app.get(this.apiPath + 'productos/:nombre', (req, res) => {
             const { nombre } = req.params;
             console.log(nombre)
 
-            try {
-                fetch(`https://api.mercadolibre.com/sites/MLM/search?q=${nombre}`)
-                    .then(res => res.text())
-                    .then(body => res.json(JSON.parse(body)));
+            if (nombre) {
+                try {
+                    fetch(`https://api.mercadolibre.com/sites/MLM/search?q=${nombre}`)
+                        .then(res => res.text())
+                        .then(body => res.json(JSON.parse(body)));
 
 
-            } catch (err) {
-                console.log(err)
-                throw new Error('Problema al consultar a la API')
+                } catch (err) {
+                    console.log(err)
+                    throw new Error('Problema al consultar a la API')
+                }
+            } else {
+                return res.status(400).json({
+                    "error": "El nombre del producto es necesario"
+                })
             }
         })
 
