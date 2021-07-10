@@ -4,7 +4,7 @@ const boton = document.querySelector('#boton')
 
 //Endpoints
 //Endpoint te regresa 50 tendencias
-const URL_TENDENCIAS = `https://api.mercadolibre.com/trends/MLA`;
+const URL_TENDENCIAS = `https://api.mercadolibre.com/trends/MLM`;
 //Te regresa todas la categorias de mercado libre
 const URL_CATEGORIAS = `https://api.mercadolibre.com/sites/MLM/categories`
     //Te regresa los productos dependiendo la categoria 
@@ -88,7 +88,6 @@ function buscarProducto(e) {
 
 //Etsan funcion recorre el json con los 12 mejores productos dependiendo la catehorias
 function insertarData(data) {
-    console.log('Data: ', data);
     const { results } = data
     console.log(results);
     let i = 0
