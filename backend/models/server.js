@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const path = require('path');
+const fetch = require('node-fetch');
 
 
 class Server {
@@ -44,6 +45,79 @@ class Server {
         this.app.get(this.apiPath, (req, res) => {
             res.json('hola');
         })
+
+        this.app.get(this.apiPath + 'categorias', (req, res) => {
+            try {
+                fetch('https://api.mercadolibre.com/sites/MLM/categories')
+                    .then(res => res.text())
+                    .then(body => res.json(JSON.parse(body)));
+
+            } catch (err) {
+                console.log(err)
+                throw new Error('Problema al consultar a la API')
+            }
+        })
+
+
+        this.app.get(this.apiPath + 'tendencias', (req, res) => {
+            try {
+                fetch('https://api.mercadolibre.com/trends/MLA')
+                    .then(res => res.text())
+                    .then(body => res.json(JSON.parse(body)));
+
+
+            } catch (err) {
+                console.log(err)
+                throw new Error('Problema al consultar a la API')
+            }
+        })
+
+
+        this.app.get(this.apiPath + 'productos-categoria/:id', (req, res) => {
+            const { id } = req.params;
+            console.log(id)
+
+            try {
+                fetch(`https://api.mercadolibre.com/sites/MLM/search?category=${id}`)
+                    .then(res => res.text())
+                    .then(body => res.json(JSON.parse(body)));
+
+
+            } catch (err) {
+                console.log(err)
+                throw new Error('Problema al consultar a la API')
+            }
+        })
+
+        //https://api.mercadolibre.com/sites/MLM/search
+
+        this.app.get(this.apiPath + 'productos/:nombre', (req, res) => {
+            const { nombre } = req.params;
+            console.log(nombre)
+
+            try {
+                fetch(`https://api.mercadolibre.com/sites/MLM/search?q=${nombre}`)
+                    .then(res => res.text())
+                    .then(body => res.json(JSON.parse(body)));
+
+
+            } catch (err) {
+                console.log(err)
+                throw new Error('Problema al consultar a la API')
+            }
+        })
+
+
+
+        this.app.get('*', (req, res) => {
+            res.status(404).json({
+                "mensaje": "Recurso no econtrado"
+            })
+        })
+
+
+
+
 
         // NO funciono :C  pero lo podemo hacer despues
         this.app.get(this.publicPath, (req, res) => {
