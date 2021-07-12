@@ -82,9 +82,7 @@ const apidefaultGet = (req, res) => {
 }
 
 const apihomeGet = (req, res) => {
-    res.status(200).json({
-        mensaje: "Bienvenido"
-    })
+    res.render('apidoc')
 }
 
 const apidocGet = (req, res) => {
