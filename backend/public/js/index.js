@@ -9,7 +9,9 @@ const URL_TENDENCIAS = `https://api-mercado-tecla.herokuapp.com/api/tendencias`;
 //`https://api.mercadolibre.com/sites/MLM/categories`
 const URL_CATEGORIAS = `https://api-mercado-tecla.herokuapp.com/api/categorias`
     //Te regresa los productos dependiendo la categoria 
-const URL_PRODUCTOS = `https://api.mercadolibre.com/sites/MLM/search?category=`;
+    //https://api-mercado-tecla.herokuapp.com/api/productos-categoria/
+    //`https://api.mercadolibre.com/sites/MLM/search?category=`
+const URL_PRODUCTOS = `https://api-mercado-tecla.herokuapp.com/api/productos-categoria/`;
 
 //consultamos las 10 tendencias y las categorias
 consultarAPI(URL_TENDENCIAS, insertarTendencias)
@@ -35,8 +37,10 @@ const fetchConfig = {
 
 //Funcion que consulta la api usando fetch
 function consultarAPI(url, callback, valor_defecto = null, fetchConfig) {
-    if (valor_defecto != null)
+    if (valor_defecto != null) {
         url = url + valor_defecto;
+        console.log(url);
+    }
     fetch(url, fetchConfig)
         .then((res) => res.json())
         .then(data => {
