@@ -11,12 +11,48 @@ router.get('/home', (req, res) => {
 })
 router.get('/', (req, res) => {
     // res.json({     mensaje: "hola"})
-    res.render('index')
+    res.redirect('/public/home')
 })
 router.get('/tienda', (req, res) => {
     // res.json({     mensaje: "hola"})
     res.render('categorias')
 })
+
+router.get('/registro', (req, res) => {
+    // res.json({     mensaje: "hola"})
+    res.render('registro')
+})
+
+router.get('/restablecer-password', (req, res) => {
+    // res.json({     mensaje: "hola"})
+    res.render('olvidepassword')
+})
+
+router.get('/login', (req, res) => {
+    // res.json({     mensaje: "hola"})
+    res.render('login')
+})
+
+
+router.get('/carrito', (req, res) => {
+    // res.json({     mensaje: "hola"})
+    res.render('cart')
+})
+
+
+router.get('/contacto', (req, res) => {
+    // res.json({     mensaje: "hola"})
+    res.render('contact')
+})
+
+router.get('/checkout', (req, res) => {
+    // res.json({     mensaje: "hola"})
+    res.render('checkout')
+})
+
+
+
+
 
 
 

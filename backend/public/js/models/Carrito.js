@@ -20,23 +20,23 @@ class Carrito {
         let index;
         const producto = new Producto(id, title, price, 1, image);
         for (let i = 0; i < this.productos.length; i++) {
-            if (this.productos[i].id == producto.id){
+            if (this.productos[i].id == producto.id) {
                 index = i;
                 exist = true;
             }
         }
-        if(!exist) 
+        if (!exist)
             this.productos.push(producto)
-        else 
+        else
             this.productos[index].cantidad += 1;
         localStorage.setItem('productos', JSON.stringify(this.productos)); // Guardamos en la memoria local el producto agregado.
-        window.location.replace('cart.html');// Redirigimos a la pagina del carrito.
+        //  window.location.replace('cart.html');// Redirigimos a la pagina del carrito.
     }
 
     /* Incrementa 1 en la cantidad de cierto producto */
     addUnProducto(e, id) {
         for (let i = 0; i < this.productos.length; i++) {
-            if (id === this.productos[i].id) 
+            if (id === this.productos[i].id)
                 this.productos[i].cantidad += 1;
         }
         localStorage.setItem('productos', JSON.stringify(this.productos)) // Guardamos en la memoria local la cantidad actualizada.
@@ -48,7 +48,7 @@ class Carrito {
         for (let i = 0; i < this.productos.length; i++) {
             if (id === this.productos[i].id) {
                 if (this.productos[i].cantidad == 1) {
-                    this.productos.splice( i, 1 );
+                    this.productos.splice(i, 1);
                 } else {
                     this.productos[i].cantidad -= 1;
                 }
@@ -59,28 +59,28 @@ class Carrito {
     }
 
     /* Eliminamos por completo un producto */
-    removeProducto(e, id){
+    removeProducto(e, id) {
         for (let i = 0; i < this.productos.length; i++) {
             if (id === this.productos[i].id) {
-                this.productos.splice( i, 1 );
+                this.productos.splice(i, 1);
             }
         }
         localStorage.setItem('productos', JSON.stringify(this.productos))
         pintarCarrito();
-    }  
+    }
 
     getTotal() {
         let total = 0;
         this.productos.forEach(e => {
-            total += e.precio*e.cantidad;            
+            total += e.precio * e.cantidad;
         });
         return total;
-    }   
+    }
 }
 
 
 /* Se crea la instancia de la clase carrito, tomando como productos los que hay guardados en memoria */
-function creaCarrito () {
+function creaCarrito() {
     let productos = [];
     if (localStorage.getItem('productos')) {
         productos = JSON.parse(localStorage.getItem('productos'));

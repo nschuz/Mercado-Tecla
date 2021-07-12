@@ -2,31 +2,20 @@
 <html lang="en">
 
 <head>
-    <!-- Basic -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!-- Mobile Metas -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- Site Metas -->
-    <meta name="keywords" content="" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
-
-    <title>Timups</title>
-    <!-- bootstrap core css -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-    <!--owl slider stylesheet -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login </title>
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-    <!-- font awesome style -->
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-
-    <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet" />
-    <!-- responsive style -->
-    <link href="css/responsive.css" rel="stylesheet" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/login.css" />
 </head>
 
 <body>
@@ -78,70 +67,39 @@
             </nav>
         </div>
     </header>
-
-    <main class="container">
-        <h2 style="text-align: center;">Checkout</h2>
-        <div class="row">
-            <div class="col-md-6">
-                <form>
-                    <div class="form-group">
-                        <!-- Full Name -->
-                        <label for="full_name_id" class="control-label">Nombre Completo</label>
-                        <input type="text" class="form-control" id="full_name_id" name="full_name" placeholder="John Deer">
+    <!-- end header section -->
+    <!-- end header section -->
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 login-section-wrapper">
+                    <div class="brand-wrapper">
+                        <img src="/images/Gris Puntos Internet Logo.png" alt="logo" class="logo">
                     </div>
-
-                    <div class="form-group">
-                        <!-- Street 1 -->
-                        <label for="street1_id" class="control-label">Calle</label>
-                        <input type="text" class="form-control" id="street1_id" name="street1" placeholder="Benito Juarez #5">
+                    <div class="login-wrapper my-auto">
+                        <h1 class="login-title">Log in</h1>
+                        <form action="#!">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="email@example.com">
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" class="form-control" placeholder="enter your passsword">
+                            </div>
+                            <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Login">
+                        </form>
+                        <a href="olvidepassword.html" class="forgot-password-link">Olvide Contraseña?</a>
+                        <p class="login-wrapper-footer-text">No tienes cuenta? <a href="registro.html" class="text-reset">Registrame Aqui</a></p>
                     </div>
-
-                    <div class="form-group">
-                        <!-- City-->
-                        <label for="city_id" class="control-label">Colonia</label>
-                        <input type="text" class="form-control" id="city_id" name="city" placeholder="Napoles">
-                    </div>
-
-                    <div class="form-group">
-                        <!-- State-->
-                        <label for="city_id" class="control-label">Estado</label>
-                        <input type="text" class="form-control" id="state" name="city" placeholder="Nuevo Leon">
-                    </div>
-
-                    <div class="form-group">
-                        <!-- Codigo postal -->
-                        <label for="zip_id" class="control-label">Codigo postal</label>
-                        <input type="text" class="form-control" id="zip_id" name="zip" placeholder="#####">
-                    </div>
-
-                    <div class="form-group">
-                        <!-- Submit Button -->
-                        <button type="submit" class="btn btn-primary">Comprar!</button>
-                    </div>
-
-                </form>
-
-            </div>
-
-            <div class="col-md-6">
-                <table class="table">
-                    <thead>
-                        <th>imagen</th>
-                        <th>nombre</th>
-                        <th>cantida</th>
-                        <th>total</th>
-                    </thead>
-                    <tbody id="itemsCheckOut"></tbody>
-                    <tfoot>
-                        <th></th>
-                        <th></th>
-                        <th>Total:</th>
-                        <th id="total"></th>
-                    </tfoot>
-                </table>
+                </div>
+                <div class="col-sm-6 px-0 d-none d-sm-block">
+                    <img src="/images/TECLALOGINAmarillaFinal.jpg" alt="login image" class="login-img">
+                </div>
             </div>
         </div>
     </main>
+
     <footer class="footer_section">
         <div class="container">
             <div class="row">
@@ -219,8 +177,11 @@
             </div>
         </div>
     </footer>
-    </footer>
-    <script type="module" src="./js/chechout.js"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>

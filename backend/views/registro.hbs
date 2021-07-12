@@ -9,13 +9,13 @@
     <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/css/font-awesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link href="css/style.css" rel="stylesheet" />
-    <link href="css/responsive.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/login.css" />
+    <link href="/css/style.css" rel="stylesheet" />
+    <link href="/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/login.css" />
 </head>
 
 <body>
@@ -74,10 +74,10 @@
             <div class="row">
                 <div class="col-sm-6 login-section-wrapper">
                     <div class="brand-wrapper">
-                        <img src="images/Gris Puntos Internet Logo.png" alt="logo" class="logo">
+                        <img src="/images/Gris Puntos Internet Logo.png" alt="logo" class="logo">
                     </div>
                     <div class="login-wrapper my-auto">
-                        <h1 class="login-title">Log in</h1>
+                        <h1 class="login-title">Registro</h1>
                         <form action="#!">
                             <div class="form-group">
                                 <label for="email">Email</label>
@@ -87,14 +87,20 @@
                                 <label for="password">Password</label>
                                 <input type="password" name="password" id="password" class="form-control" placeholder="enter your passsword">
                             </div>
-                            <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Login">
+
+                            <div class="form-group mb-4">
+                                <label for="password">Confirm Password</label>
+                                <input type="password" name="password" id="password" class="form-control" placeholder="enter your passsword">
+                            </div>
+
+                            <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Login" style="background-color: #ED48C9;">
                         </form>
                         <a href="olvidepassword.html" class="forgot-password-link">Olvide Contraseña?</a>
-                        <p class="login-wrapper-footer-text">No tienes cuenta? <a href="registro.html" class="text-reset">Registrame Aqui</a></p>
+                        <p class="login-wrapper-footer-text">Tienes Cuenta?<a href="login.html" class="text-reset">Inicia Sesion Aqui</a></p>
                     </div>
                 </div>
                 <div class="col-sm-6 px-0 d-none d-sm-block">
-                    <img src="images/TECLALOGINAmarillaFinal.jpg" alt="login image" class="login-img">
+                    <img src="/images/TECLALOGINROSAFinal.jpg" alt="login image" class="login-img">
                 </div>
             </div>
         </div>
@@ -177,8 +183,6 @@
             </div>
         </div>
     </footer>
-
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
