@@ -13,8 +13,9 @@ class Server {
             //aqui colocamos nuestros paths
         this.apiPath = '/api/'
         this.publicPath = '/public'
+        this.app.set('views', path.join(__dirname, '../', '/views'));
+        console.log(path.join(__dirname, '../', '/views'));
         this.app.set('view engine', 'hbs');
-        this.app.set(path.join(__dirname, '../', 'views'));
 
 
         //Middlewares
@@ -34,7 +35,7 @@ class Server {
         this.app.use(cors())
 
         //Middleware Public
-        console.log(path.join(__dirname, '../', 'public'));
+
         this.app.use(express.static(path.join(__dirname, '../', 'public')))
 
 
