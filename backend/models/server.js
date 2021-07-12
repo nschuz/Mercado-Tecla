@@ -14,6 +14,7 @@ class Server {
         this.apiPath = '/api/'
         this.publicPath = '/public'
         this.app.set('view engine', 'hbs');
+        this.app.set(path.join(__dirname, '../', 'views'));
 
 
         //Middlewares
@@ -27,6 +28,7 @@ class Server {
     }
 
     middlewares() {
+
 
         //Cors
         this.app.use(cors())
