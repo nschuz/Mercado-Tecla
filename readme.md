@@ -6,8 +6,8 @@ Contentos por entregar la DEMO :D
 
 
 ## Paso para ejecutar
-- Decargar el codigo -> hacinedo un " git clone (url)"			
-- En la ruta home -> ejcutar  "npm install" para reconstruir los paquetes 			
+- Decargar el codigo -> haciendo un " git clone (url)"			
+- En la ruta home -> ejecutar  "npm install" para reconstruir los paquetes 			
 - Hacer un cd backend  (movernos a la ruta ./backend)		
 - Ejecutar el comando nodemon app.js o node app.js
 - Disfrutar :) 
