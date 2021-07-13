@@ -19,25 +19,25 @@ Contentos por entregar la DEMO :D
 ## Endpoits 
 
 ### ENPOITS FRONTEND 
-https://api-mercado-tecla.herokuapp.com/public/home
-https://api-mercado-tecla.herokuapp.com/public/about
-https://api-mercado-tecla.herokuapp.com/public/registro
-https://api-mercado-tecla.herokuapp.com/public/tienda
-https://api-mercado-tecla.herokuapp.com/public/restablecer-password
-https://api-mercado-tecla.herokuapp.com/public/login
-https://api-mercado-tecla.herokuapp.com/public/carrito
-https://api-mercado-tecla.herokuapp.com/public/contacto
-https://api-mercado-tecla.herokuapp.com/public/checkout
+- https://api-mercado-tecla.herokuapp.com/public/home
+- https://api-mercado-tecla.herokuapp.com/public/about
+- https://api-mercado-tecla.herokuapp.com/public/registro
+- https://api-mercado-tecla.herokuapp.com/public/tienda
+- https://api-mercado-tecla.herokuapp.com/public/restablecer-password
+- https://api-mercado-tecla.herokuapp.com/public/login
+- https://api-mercado-tecla.herokuapp.com/public/carrito
+- https://api-mercado-tecla.herokuapp.com/public/contacto
+- https://api-mercado-tecla.herokuapp.com/public/checkout
 
 
 
 ### ENPOITS  API
-https://api-mercado-tecla.herokuapp.com/api/
-https://api-mercado-tecla.herokuapp.com/api/categorias
-https://api-mercado-tecla.herokuapp.com/api/tendencias
-https://api-mercado-tecla.herokuapp.com/api/productos-categoria/MLM
-https://api-mercado-tecla.herokuapp.com/api/productos/televisosres
-https://api-mercado-tecla.herokuapp.com/api/doc
+- https://api-mercado-tecla.herokuapp.com/api/
+- https://api-mercado-tecla.herokuapp.com/api/categorias
+- https://api-mercado-tecla.herokuapp.com/api/tendencias
+- https://api-mercado-tecla.herokuapp.com/api/productos-categoria/MLM
+- https://api-mercado-tecla.herokuapp.com/api/productos/televisosres
+- https://api-mercado-tecla.herokuapp.com/api/doc
 
 
 
