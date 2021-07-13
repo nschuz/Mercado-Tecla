@@ -1,5 +1,6 @@
 # Demo 1- Mercado Tecla
-## Jorge Regis / Samuel Medina
+## Dupla 2 
+### Jorge Regis / Samuel Medina
 
 Contentos por entregar la DEMO :D
 
