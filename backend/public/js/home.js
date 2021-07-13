@@ -1,4 +1,4 @@
-const URL_CATEGORIAS = `https://api.mercadolibre.com/sites/MLM/categories`
+const URL_CATEGORIAS = `https://api-mercado-tecla.herokuapp.com/api/categorias`
     //Te regresa los productos dependiendo la categoria 
 const URL_PRODUCTOS = `https://api.mercadolibre.com/sites/MLM/search?category=`;
 
