@@ -10,7 +10,7 @@ const homeGet = (req, res) => {
 }
 
 const redirectGet = (req, res) => {
-    res.redirect('/public/home')
+    res.redirect('/tienda/home')
 }
 
 const tiendaGet = (req, res) => {

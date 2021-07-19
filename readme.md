@@ -19,15 +19,15 @@ Contentos por entregar la DEMO :D
 ## Endpoits 
 
 ### ENPOITS FRONTEND 
-- https://api-mercado-tecla.herokuapp.com/public/home
-- https://api-mercado-tecla.herokuapp.com/public/about
-- https://api-mercado-tecla.herokuapp.com/public/registro
-- https://api-mercado-tecla.herokuapp.com/public/tienda
-- https://api-mercado-tecla.herokuapp.com/public/restablecer-password
-- https://api-mercado-tecla.herokuapp.com/public/login
-- https://api-mercado-tecla.herokuapp.com/public/carrito
-- https://api-mercado-tecla.herokuapp.com/public/contacto
-- https://api-mercado-tecla.herokuapp.com/public/checkout
+- https://api-mercado-tecla.herokuapp.com/tienda/home
+- https://api-mercado-tecla.herokuapp.com/tienda/about
+- https://api-mercado-tecla.herokuapp.com/tienda/registro
+- https://api-mercado-tecla.herokuapp.com/tienda/tienda
+- https://api-mercado-tecla.herokuapp.com/tienda/restablecer-password
+- https://api-mercado-tecla.herokuapp.com/tienda/login
+- https://api-mercado-tecla.herokuapp.com/tienda/carrito
+- https://api-mercado-tecla.herokuapp.com/tienda/contacto
+- https://api-mercado-tecla.herokuapp.com/tienda/checkout
 
 
 

@@ -12,7 +12,7 @@ const {
     carritoGet,
     contactoGet,
     checkoutGet
-} = require('../controllers/public.controller')
+} = require('../controllers/tienda.controller')
 
 router.get('/about', aboutGet);
 router.get('/home', homeGet);

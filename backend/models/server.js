@@ -12,7 +12,7 @@ class Server {
         this.port = process.env.PORT
             //aqui colocamos nuestros paths
         this.apiPath = '/api/'
-        this.publicPath = '/public'
+        this.publicPath = '/tienda'
         this.app.set('views', path.join(__dirname, '../', '/views'));
         console.log(path.join(__dirname, '../', '/views'));
         this.app.set('view engine', 'hbs');
@@ -54,7 +54,7 @@ class Server {
         //entra a nuestra api
         this.app.use(this.apiPath, require('../routes/api.routes'))
             //entra a nuestro public donde hacemos el render del html (a futuro)
-        this.app.use(this.publicPath, require('../routes/public.routes'))
+        this.app.use(this.publicPath, require('../routes/tienda.routes'))
 
 
 
