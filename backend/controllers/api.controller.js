@@ -18,9 +18,10 @@ const apiCategeoriasGet = (req = request, res = response) => {
 
 }
 
+
 const apiTendenciasGet = (req = request, res = response) => {
     try {
-        fetch('https://api.mercadolibre.com/trends/MLM')
+        fetch('https://api.mercadolibre.com/trends/MLA')
             .then(res => res.text())
             .then(body => res.json(JSON.parse(body)));
 
@@ -31,6 +32,7 @@ const apiTendenciasGet = (req = request, res = response) => {
     }
 
 }
+
 
 const productosCategoriasGet = (req = request, res = response) => {
     const { id } = req.params;
@@ -87,7 +89,7 @@ const apidocGet = (req, res) => {
     res.render('apidoc');
 }
 
-//
+
 
 
 module.exports = {

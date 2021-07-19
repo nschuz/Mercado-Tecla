@@ -1,59 +1,29 @@
 //Este archivo es para un futuro
 const { Router } = require('express');
 const router = Router();
-const hbs = require('hbs');
+const {
+    aboutGet,
+    homeGet,
+    redirectGet,
+    tiendaGet,
+    registroGet,
+    olvidepasswordGet,
+    loginGet,
+    carritoGet,
+    contactoGet,
+    checkoutGet
+} = require('../controllers/public.controller')
 
-router.get('/about', (req, res) => {
-    res.render('about')
-})
-router.get('/home', (req, res) => {
-    res.render('index')
-})
-router.get('/', (req, res) => {
-    // res.json({     mensaje: "hola"})
-    res.redirect('/public/home')
-})
-router.get('/tienda', (req, res) => {
-    // res.json({     mensaje: "hola"})
-    res.render('categorias')
-})
-
-router.get('/registro', (req, res) => {
-    // res.json({     mensaje: "hola"})
-    res.render('registro')
-})
-
-router.get('/restablecer-password', (req, res) => {
-    // res.json({     mensaje: "hola"})
-    res.render('olvidepassword')
-})
-
-router.get('/login', (req, res) => {
-    // res.json({     mensaje: "hola"})
-    res.render('login')
-})
-
-
-router.get('/carrito', (req, res) => {
-    // res.json({     mensaje: "hola"})
-    res.render('cart')
-})
-
-
-router.get('/contacto', (req, res) => {
-    // res.json({     mensaje: "hola"})
-    res.render('contact')
-})
-
-router.get('/checkout', (req, res) => {
-    // res.json({     mensaje: "hola"})
-    res.render('checkout')
-})
-
-
-
-
-
+router.get('/about', aboutGet);
+router.get('/home', homeGet);
+router.get('/', redirectGet)
+router.get('/tienda', tiendaGet)
+router.get('/registro', registroGet)
+router.get('/restablecer-password', olvidepasswordGet)
+router.get('/login', loginGet);
+router.get('/carrito', carritoGet)
+router.get('/contacto', contactoGet)
+router.get('/checkout', checkoutGet)
 
 
 module.exports = router;
