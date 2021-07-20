@@ -30,7 +30,7 @@ class Carrito {
         else
             this.productos[index].cantidad += 1;
         localStorage.setItem('productos', JSON.stringify(this.productos)); // Guardamos en la memoria local el producto agregado.
-        window.location.replace('/public/carrito');// Redirigimos a la pagina del carrito.
+        window.location.replace('/tienda/carrito'); // Redirigimos a la pagina del carrito.
     }
 
     /* Incrementa 1 en la cantidad de cierto producto */

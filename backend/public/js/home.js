@@ -29,7 +29,7 @@ function fetchData(url) {
 }
 
 
-async function productos(data) {
+async function productos(data, bandera = '') {
     const productos = data;
     item = productos[Math.floor(Math.random() * productos.length)];
     //console.log(`${URL_PRODUCTOS}${item.id}`)

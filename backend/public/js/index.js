@@ -1,6 +1,10 @@
 import { carrito } from "./models/Carrito.js";
+import { Busqueda } from "./searchProducts.js"
 
-const boton = document.querySelector('#boton')
+
+const btn = document.querySelector('#search-btn');
+
+
 
 //Endpoints
 //Endpoint te regresa 50 tendencias
@@ -13,13 +17,34 @@ const URL_CATEGORIAS = `https://api-mercado-tecla.herokuapp.com/api/categorias`
     //`https://api.mercadolibre.com/sites/MLM/search?category=`
 const URL_PRODUCTOS = `https://api-mercado-tecla.herokuapp.com/api/productos-categoria/`;
 
+const boton = document.querySelector('#boton')
+
+
+
+
+
+
+
 //consultamos las 10 tendencias y las categorias
 consultarAPI(URL_TENDENCIAS, insertarTendencias)
 consultarAPI(URL_CATEGORIAS, insertarOption)
 
 document.addEventListener('DOMContentLoaded', () => {
     boton.addEventListener('click', buscarProducto);
+    btn.addEventListener('click', async(e) => {
+        e.preventDefault();
+        const obj = new Busqueda();
+        let json = await obj.consultarAPI();
+        obj.hola();
+        console.log(json);
+        limpiarhtml();
+        insertarData(json);
+
+    });
+
 });
+
+
 
 //Cors
 const myHeaders = new Headers({
@@ -95,6 +120,9 @@ function buscarProducto(e) {
 //Etsan funcion recorre el json con los 12 mejores productos dependiendo la catehorias
 function insertarData(data) {
     console.log('Data: ', data);
+
+
+
     const { results } = data
     console.log(results);
     let i = 0
