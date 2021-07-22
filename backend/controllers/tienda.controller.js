@@ -1,4 +1,8 @@
 const { response, request } = require('express')
+const { Contacto } = require('../models/contacto');
+
+
+
 
 
 const aboutGet = (req, res) => {
@@ -41,6 +45,10 @@ const checkoutGet = (req, res) => {
     res.render('checkout')
 }
 
+const contactoPost = (req, res) => {
+
+}
+
 
 
 
@@ -55,5 +63,6 @@ module.exports = {
     carritoGet,
     contactoGet,
     checkoutGet,
+    contactoPost
 
 }

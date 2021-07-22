@@ -11,7 +11,8 @@ const {
     loginGet,
     carritoGet,
     contactoGet,
-    checkoutGet
+    checkoutGet,
+    contactoPost
 } = require('../controllers/tienda.controller')
 
 router.get('/about', aboutGet);
@@ -24,6 +25,7 @@ router.get('/login', loginGet);
 router.get('/carrito', carritoGet)
 router.get('/contacto', contactoGet)
 router.get('/checkout', checkoutGet)
+router.post('/contacto', contactoPost);
 
 
 module.exports = router;

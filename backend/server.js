@@ -1,8 +1,11 @@
 const express = require('express')
 const cors = require('cors')
 const path = require('path');
-const { apiLimiter } = require('../middlewares/funciones')
-const hbs = require('hbs');
+const { apiLimiter } = require('./middlewares/funciones')
+const { User } = require('./models/usuario');
+const { Contacto } = require('./models/contacto');
+const sequelize = require("./db/conexion");
+
 
 
 class Server {
@@ -13,8 +16,8 @@ class Server {
             //aqui colocamos nuestros paths
         this.apiPath = '/api/'
         this.publicPath = '/tienda'
-        this.app.set('views', path.join(__dirname, '../', '/views'));
-        console.log(path.join(__dirname, '../', '/views'));
+        this.app.set('views', path.join(__dirname, '/views'));
+        console.log(path.join(__dirname, '/views'));
         this.app.set('view engine', 'hbs');
 
 
@@ -26,6 +29,24 @@ class Server {
         //Rutas de mi apliccion
         this.routes()
 
+        this.conectarDB();
+
+    }
+
+    async conectarDB() {
+        //db.sequelize.sync();
+        try {
+            await sequelize.authenticate();
+            console.log('Connection has been established successfully.');
+            await sequelize.sync();
+            // await sequelize.models.User.sync({ force: true });
+            // await Contacto.sync();
+            console.log("All models were synchronized successfully.");
+        } catch (error) {
+            console.error('Unable to connect to the database:', error);
+        }
+
+
     }
 
     middlewares() {
@@ -36,7 +57,7 @@ class Server {
 
         //Middleware Public
 
-        this.app.use(express.static(path.join(__dirname, '../', 'public')))
+        this.app.use(express.static(path.join(__dirname, 'public')))
 
 
 
@@ -45,6 +66,8 @@ class Server {
 
         //express-rate-limit
         this.app.use(apiLimiter)
+
+
     }
 
 
@@ -52,9 +75,9 @@ class Server {
     routes() {
         //Usamos un middlware condicional 
         //entra a nuestra api
-        this.app.use(this.apiPath, require('../routes/api.routes'))
+        this.app.use(this.apiPath, require('./routes/api.routes'))
             //entra a nuestro public donde hacemos el render del html (a futuro)
-        this.app.use(this.publicPath, require('../routes/tienda.routes'))
+        this.app.use(this.publicPath, require('./routes/tienda.routes'))
 
 
 
