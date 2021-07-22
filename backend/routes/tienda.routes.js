@@ -1,5 +1,8 @@
 //Este archivo es para un futuro
 const { Router } = require('express');
+const { body } = require('express-validator');
+const { validarCampos } = require('../middlewares/sumaErrores')
+
 const router = Router();
 const {
     aboutGet,
@@ -25,7 +28,12 @@ router.get('/login', loginGet);
 router.get('/carrito', carritoGet)
 router.get('/contacto', contactoGet)
 router.get('/checkout', checkoutGet)
-router.post('/contacto', contactoPost);
+
+
+router.post('/contacto', [
+    body('nombre').not().isEmpty(),
+    validarCampos
+], contactoPost);
 
 
 module.exports = router;

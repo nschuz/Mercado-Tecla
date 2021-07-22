@@ -45,8 +45,41 @@ const checkoutGet = (req, res) => {
     res.render('checkout')
 }
 
-const contactoPost = (req, res) => {
+const contactoPost = async(req, res) => {
+    const { nombre, telefono, email, mensaje } = req.body;
+    try {
+        const contacto = await Contacto.create({
+            nombre,
+            telefono,
+            email,
+            mensaje,
+        })
+        res.status(200).redirect('/tienda/contacto');
 
+    } catch (e) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+        console.log(e);
+    }
+
+
+}
+
+const contacto2 = (req, res) => {
+    const { nombre, telefono, email, mensaje } = req.body;
+    console.log(telefono);
+    console.log(email);
+    return Contacto.create({
+        nombre,
+        telefono,
+        email,
+        mensaje,
+    }).then(function(Contacto) {
+        if (Contacto) {
+            res.send(Contacto);
+        } else {
+            res.status(400).send('Error in insert new record');
+        }
+    });
 }
 
 

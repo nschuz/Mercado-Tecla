@@ -2,8 +2,6 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path');
 const { apiLimiter } = require('./middlewares/funciones')
-const { User } = require('./models/usuario');
-const { Contacto } = require('./models/contacto');
 const sequelize = require("./db/conexion");
 
 
@@ -19,6 +17,7 @@ class Server {
         this.app.set('views', path.join(__dirname, '/views'));
         console.log(path.join(__dirname, '/views'));
         this.app.set('view engine', 'hbs');
+
 
 
         //Middlewares
@@ -45,8 +44,6 @@ class Server {
         } catch (error) {
             console.error('Unable to connect to the database:', error);
         }
-
-
     }
 
     middlewares() {
@@ -63,6 +60,7 @@ class Server {
 
         //un middlware para recibir un json den el header - Lectura y parseo del body
         this.app.use(express.json())
+        this.app.use(express.urlencoded({ extended: true }));
 
         //express-rate-limit
         this.app.use(apiLimiter)
