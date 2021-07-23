@@ -1,20 +1,19 @@
-const dbConfig = require("./config.db");
 const Sequelize = require("sequelize");
-const db = {};
+require('dotenv').config({ path: '../dev.env' })
+
 let sequelize;
 
 
-
 try {
-    sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-        host: dbConfig.HOST,
-        dialect: dbConfig.dialect,
-        pool: {
-            max: dbConfig.pool.max,
-            min: dbConfig.pool.min,
-            acquire: dbConfig.pool.acquire,
-            idle: dbConfig.pool.idle
-        }
+    sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PASSWORD, {
+        host: process.env.HOST,
+        dialect: process.env.dialect,
+        /*   pool: {
+               max: process.env.max,
+               min: process.env.min,
+               acquire: process.envacquire,
+               idle: process.env.idle
+           }*/
     });
     console.log("Conexion a la base de datos correcta");
 } catch (e) {
@@ -22,11 +21,6 @@ try {
 
 }
 
-
-//db.Sequelize = Sequelize;
-//db.sequelize = sequelize;
-//db.tutorials = require("../models/prueba")(sequelize, Sequelize);
-//db.contactos = require("../models/contacto")(sequelize, Sequelize);
 
 
 module.exports = sequelize;

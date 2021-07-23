@@ -45,6 +45,7 @@ const checkoutGet = (req, res) => {
     res.render('checkout')
 }
 
+//INsertamos a la base de datos
 const contactoPost = async(req, res) => {
     const { nombre, telefono, email, mensaje } = req.body;
     try {
@@ -60,27 +61,49 @@ const contactoPost = async(req, res) => {
         res.status(400).json('No se pudo procesar tu solicitud');
         console.log(e);
     }
+}
+
+//Borramos algun registro
+const contactoBorrar = async(req, res) => {
+
+    try {
+        const { email } = req.params;
+        console.log(email);
+        await Contacto.destroy({ where: { email } })
+        return res.status(200).json("registro eliminado");
+    } catch (e) {
+        res.status(400).json("No se pudo procesaro la solictud");
+    }
+
+}
+
+//Actalizamos algun resgitro
+const contactoPut = async(req, res) => {
+    const { nombre, telefono, email, menssage } = req.body;
+    console.log(menssage);
+    try {
+        Contacto.update({ nombre, telefono, mensaje: menssage }, { where: { email } });
+        res.status(200).json("Datos actaulizados");
+    } catch (e) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+        console.log(e);
+    }
 
 
 }
 
-const contacto2 = (req, res) => {
-    const { nombre, telefono, email, mensaje } = req.body;
-    console.log(telefono);
-    console.log(email);
-    return Contacto.create({
-        nombre,
-        telefono,
-        email,
-        mensaje,
-    }).then(function(Contacto) {
-        if (Contacto) {
-            res.send(Contacto);
-        } else {
-            res.status(400).send('Error in insert new record');
-        }
-    });
+//obtenemos registro
+const contacto2Get = async(req, res) => {
+    try {
+        const contactos = await Contacto.findAll();
+        console.log(contactos);
+        res.status(200).json(contactos);
+    } catch (e) {
+        res.status(400).json('Problema al solicitar tu peticion');
+        console.log(e);
+    }
 }
+
 
 
 
@@ -96,6 +119,9 @@ module.exports = {
     carritoGet,
     contactoGet,
     checkoutGet,
-    contactoPost
+    contactoPost,
+    contacto2Get,
+    contactoBorrar,
+    contactoPut,
 
 }

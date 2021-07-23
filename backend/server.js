@@ -1,8 +1,10 @@
 const express = require('express')
 const cors = require('cors')
+const colors = require('colors');
 const path = require('path');
 const { apiLimiter } = require('./middlewares/funciones')
 const sequelize = require("./db/conexion");
+const morgan = require('morgan')
 
 
 
@@ -33,16 +35,15 @@ class Server {
     }
 
     async conectarDB() {
-        //db.sequelize.sync();
         try {
             await sequelize.authenticate();
-            console.log('Connection has been established successfully.');
+            console.log('Conexion con la base de datos establecida'.green);
             await sequelize.sync();
             // await sequelize.models.User.sync({ force: true });
             // await Contacto.sync();
-            console.log("All models were synchronized successfully.");
+            console.log("Todos los modelos fueron sincronizados correctamente".green);
         } catch (error) {
-            console.error('Unable to connect to the database:', error);
+            console.error('Problema al conectrase o al sicronizar modelos'.red, error);
         }
     }
 
@@ -53,7 +54,6 @@ class Server {
         this.app.use(cors())
 
         //Middleware Public
-
         this.app.use(express.static(path.join(__dirname, 'public')))
 
 
@@ -64,6 +64,8 @@ class Server {
 
         //express-rate-limit
         this.app.use(apiLimiter)
+
+        this.app.use(morgan('combined'))
 
 
     }
@@ -84,7 +86,7 @@ class Server {
     //Este metodo es el listen escucha al puerto
     listen() {
         this.app.listen(this.port || 8080, () => {
-            console.log("Server corriendo");
+            console.log("Server corriendo".green);
         })
     }
 
