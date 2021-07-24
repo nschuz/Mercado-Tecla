@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
-const db = require('./conexion')
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../db/conexion');
 
-const Producto = db.define('producto', {
+const Producto = sequelize.define('producto', {
     id_producto: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -20,19 +20,19 @@ const Producto = db.define('producto', {
         allowNull: false
     },
     cantidad: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     imagen: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    stock: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-    },
+    // stock: {
+    //     type: Sequelize.INTEGER,
+    //     allowNull: false
+    // },
     categoria: {
-        id_categoria: Sequelize.STRING, //Llave foranea
+        type: Sequelize.STRING, //Llave foranea
         allowNull: false
     },
     createdAt: Sequelize.DATE,

@@ -19,7 +19,13 @@ const {
     contactoPost,
     contacto2Get,
     contactoBorrar,
-    contactoPut
+    contactoPut,
+    productoGet,
+    productoPost,
+    productosGet,
+    productos2Get,
+    productoPut,
+    productoBorrar,
 } = require('../controllers/tienda.controller')
 
 router.get('/about', aboutGet);
@@ -32,6 +38,7 @@ router.get('/login', loginGet);
 router.get('/carrito', carritoGet)
 router.get('/contacto', contactoGet)
 router.get('/checkout', checkoutGet)
+router.get('/add-producto', productoGet)
 
 //insertar
 router.post('/contacto', [
@@ -56,8 +63,6 @@ router.put('/contacto/:email', [
     validarCampos
 ], contactoPut);
 
-
-
 //delete  registro
 router.delete('/contacto/:email', [
     check('email', "El email no es valido").isEmail().normalizeEmail(),
@@ -65,5 +70,38 @@ router.delete('/contacto/:email', [
     validarCampos
 ], contactoBorrar);
 
+/* Rutas De Gestion de productos */
+
+// Crear un nuevo producto
+router.post('/producto', [
+    body('nombre', "El nombre es necesario").not().isEmpty(),
+    check('precio', "Verificar el precio").not().isEmpty().isFloat(),
+    check('descripcion', "Es necesaria la descripcion").not().isEmpty(),
+    check('cantidad', "Verificar la cantidad").not().isEmpty().isInt(),
+    check('imagen', "Es necesaria la imagen").not().isEmpty(),
+    check('categoria', "Es necesaria la categoria").not().isEmpty(),
+    validarCampos
+], productoPost);
+
+//Leer productos
+router.get('/productos', productosGet);
+router.get('/ver-productos', productos2Get);
+
+//Actualizar un producto
+router.put('/producto/:id', [
+    body('nombre', "El nombre es necesario").not().isEmpty(),
+    // check('email').custom(emailExiste),
+    check('precio', "Verificar el precio").not().isEmpty().isFloat(),
+    check('descripcion', "Es necesaria la descripcion").not().isEmpty(),
+    check('cantidad', "Verificar la cantidad").not().isEmpty().isInt(),
+    check('imagen', "Es necesaria la imagen").not().isEmpty(),
+    check('categoria', "Es necesaria la categoria").not().isEmpty(),
+    validarCampos
+], productoPut);
+
+//Eliminar un producto
+router.delete('/producto/:id', [
+    validarCampos
+], productoBorrar);
 
 module.exports = router;

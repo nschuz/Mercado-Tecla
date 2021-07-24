@@ -1,5 +1,6 @@
 const { response, request } = require('express')
 const { Contacto } = require('../models/contacto');
+const { Producto } = require('../models/Producto')
 
 
 
@@ -45,6 +46,10 @@ const checkoutGet = (req, res) => {
     res.render('checkout')
 }
 
+const productoGet = (req, res) => {
+    res.render('add-producto')
+}
+
 //INsertamos a la base de datos
 const contactoPost = async(req, res) => {
     const { nombre, telefono, email, mensaje } = req.body;
@@ -88,8 +93,6 @@ const contactoPut = async(req, res) => {
         res.status(400).json('No se pudo procesar tu solicitud');
         console.log(e);
     }
-
-
 }
 
 //obtenemos registro
@@ -104,9 +107,67 @@ const contacto2Get = async(req, res) => {
     }
 }
 
+/* Controles de productos*/
 
+//Insertamos un producto nuevo a la base de datos.
+const productoPost = async(req, res) => {
+    const { nombre, precio, descripcion, cantidad, imagen, categoria } = req.body;
+    try {
+        const producto = await Producto.create({
+            nombre,
+            precio,
+            descripcion,
+            cantidad,
+            imagen,
+            categoria,
+        })
+        res.status(200).redirect('/tienda/ver-productos');
 
+    } catch (e) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+        console.log(e);
+    }
+}
 
+//Obtenemos los productos de la db
+const productosGet = async(req, res) => {
+    try {
+        const productos = await Producto.findAll();
+        res.status(200).json(productos);
+    } catch (e) {
+        res.status(400).json('Problema al solicitar tu peticion');
+        console.log(e);
+    }
+}
+
+const productos2Get = async (req, res) => {
+    const productos = await Producto.findAll();
+    res.render('productos', { productos: productos})
+}
+
+//Actalizamos un producto
+const productoPut = async(req, res) => {
+    const { nombre, precio, descripcion, cantidad, imagen, categoria } = req.body;
+    let id_producto = req.params.id;
+    try {
+        Producto.update({ nombre, precio, descripcion, cantidad, imagen, categoria }, { where: { id_producto } });
+        res.status(200).json("Datos actualizados");
+    } catch (e) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+        console.log(e);
+    }
+}
+
+//Borramos algun producto
+ const productoBorrar = async(req, res) => {
+     try {
+         const id_producto = req.params.id;
+         await Producto.destroy({ where: { id_producto } })
+         return res.status(200).json("Registro eliminado");
+     } catch (e) {
+         res.status(400).json("No se pudo procesaro la solicitud");
+     }
+ }
 
 module.exports = {
     aboutGet,
@@ -123,5 +184,10 @@ module.exports = {
     contacto2Get,
     contactoBorrar,
     contactoPut,
-
+    productoGet,
+    productoPost,
+    productosGet,
+    productos2Get,
+    productoPut,
+    productoBorrar
 }
