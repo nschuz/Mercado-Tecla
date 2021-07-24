@@ -5,19 +5,22 @@ let sequelize;
 
 
 try {
-    sequelize = new Sequelize(process.env.DB, process.env.USER, process.env.PASSWORD, {
-        host: process.env.HOST,
+    sequelize = new Sequelize(process.env.DBAZURE, process.env.USERAZURE, process.env.PASSAZURE, {
+        //host: process.env.HOST,
+        host: process.env.HOSTAZURE,
         dialect: process.env.dialect,
-        /*   pool: {
-               max: process.env.max,
-               min: process.env.min,
-               acquire: process.envacquire,
-               idle: process.env.idle
-           }*/
+        pool: {
+            max: 5,
+            min: 0,
+            idle: 10000
+        },
+        dialectOptions: {
+            encrypt: true
+        }
     });
-    console.log("Conexion a la base de datos correcta");
+    console.log("Conexion a la base de datos correcta".green);
 } catch (e) {
-    console.log("Problema en la conexion " + e);
+    console.log("Problema en la conexion ".red + e);
 
 }
 
