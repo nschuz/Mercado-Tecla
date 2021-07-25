@@ -2,7 +2,7 @@
 const { Router } = require('express');
 const { body, check } = require('express-validator');
 const { validarCampos } = require('../middlewares/sumaErrores')
-const { emailExiste, emailNoExiste } = require('../services/db_validaciones.service')
+const { emailExiste, emailNoExiste, idExiste } = require('../services/db_validaciones.service')
 
 const router = Router();
 const {
@@ -26,6 +26,8 @@ const {
     productos2Get,
     productoPut,
     productoBorrar,
+    registroPost,
+    registroPut,
 } = require('../controllers/tienda.controller')
 
 router.get('/about', aboutGet);
@@ -103,5 +105,41 @@ router.put('/producto/:id', [
 router.delete('/producto/:id', [
     validarCampos
 ], productoBorrar);
+
+
+
+/*Registro de usuarios*/
+//registramos un usuario
+router.post('/registro', [
+    body('nombre', "Nombre vacio").not().isEmpty(),
+    body('nombre', "El nombre no pude llevar numeros").not().isNumeric(),
+    body('apellido', "El apellido no pude llevar numeros").not().isNumeric(),
+    body('apellido', "Appelido  vacio").not().isEmpty(),
+    body('email', "Email vacio").not().isEmpty(),
+    body('email', "Tu email no tiene formato de email").isEmail(),
+    check('email', "El mail existe en la base de datos").custom(emailExiste),
+    body('password', "El password no es valido").not().isEmpty().isLength({ min: 5 }).not().isIn(['123', 'password', 'god'])
+    .withMessage('Passwords comunes'),
+    body('date', 'Formato de fecha incorrecta').isDate(),
+    validarCampos
+], registroPost);
+
+
+//Actualizar registro
+router.put('/registro/:id', [
+    check('id').custom(idExiste),
+    body('nombre', "Nombre vacio").not().isEmpty(),
+    body('nombre', "El nombre no pude llevar numeros").not().isNumeric(),
+    body('apellido', "El apellido no pude llevar numeros").not().isNumeric(),
+    body('apellido', "Appelido  vacio").not().isEmpty(),
+    body('email', "Email vacio").not().isEmpty(),
+    body('email', "Tu email no tiene formato de email").isEmail(),
+    body('password', "El password no es valido").not().isEmpty().isLength({ min: 5 }).not().isIn(['123', 'password', 'god'])
+    .withMessage('Passwords comunes'),
+    validarCampos,
+], registroPut)
+
+
+
 
 module.exports = router;

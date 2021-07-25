@@ -1,6 +1,9 @@
 const { response, request } = require('express')
 const { Contacto } = require('../models/contacto');
 const { Producto } = require('../models/Producto')
+const { Usuario } = require('../models/Usuario');
+const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
 
 
 
@@ -107,6 +110,58 @@ const contacto2Get = async(req, res) => {
     }
 }
 
+/*Controles registro usuario */
+//Insertamos un usuario a la base de datos
+const registroPost = async(req, res) => {
+    const { nombre, apellido, email, password, date } = req.body;
+
+    try {
+
+        //ciframos la contraseña
+        const passHas = await bcrypt.hash(password, 10);
+
+        //Guardamos en la base de datos al usuario
+        const usuario = await Usuario.create({
+            id_unico: uuidv4(),
+            nombre,
+            apellido,
+            password: passHas,
+            email,
+            date,
+        })
+
+
+
+        // res.status(200).redirect('/tienda/login');
+        res.status(200).json("usuario creado")
+
+    } catch (e) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+        console.log(e);
+    }
+
+}
+
+//Actaualizamos un usuario en la base de datos
+const registroPut = async(req, res) => {
+    const { nombre, apellido, email, password, date } = req.body;
+    const { id } = req.params;
+
+    try {
+        const passHas = await bcrypt.hash(password, 10);
+        Usuario.update({ nombre, apellido, email, password: passHas }, { where: { id_unico: id } });
+        res.status(200).json("Datos actaulizados");
+    } catch (e) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+        console.log(e);
+    }
+
+}
+
+
+
+
+
 /* Controles de productos*/
 
 //Insertamos un producto nuevo a la base de datos.
@@ -140,9 +195,9 @@ const productosGet = async(req, res) => {
     }
 }
 
-const productos2Get = async (req, res) => {
+const productos2Get = async(req, res) => {
     const productos = await Producto.findAll();
-    res.render('productos', { productos: productos})
+    res.render('productos', { productos: productos })
 }
 
 //Actalizamos un producto
@@ -159,15 +214,15 @@ const productoPut = async(req, res) => {
 }
 
 //Borramos algun producto
- const productoBorrar = async(req, res) => {
-     try {
-         const id_producto = req.params.id;
-         await Producto.destroy({ where: { id_producto } })
-         return res.status(200).json("Registro eliminado");
-     } catch (e) {
-         res.status(400).json("No se pudo procesaro la solicitud");
-     }
- }
+const productoBorrar = async(req, res) => {
+    try {
+        const id_producto = req.params.id;
+        await Producto.destroy({ where: { id_producto } })
+        return res.status(200).json("Registro eliminado");
+    } catch (e) {
+        res.status(400).json("No se pudo procesaro la solicitud");
+    }
+}
 
 module.exports = {
     aboutGet,
@@ -189,5 +244,7 @@ module.exports = {
     productosGet,
     productos2Get,
     productoPut,
-    productoBorrar
+    productoBorrar,
+    registroPost,
+    registroPut,
 }

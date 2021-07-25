@@ -4,7 +4,8 @@ const colors = require('colors');
 const path = require('path');
 const { apiLimiter } = require('./middlewares/funciones')
 const sequelize = require("./db/conexion");
-const morgan = require('morgan')
+const morgan = require('morgan');
+const { Usuario } = require('./models/usuario');
 
 
 
@@ -41,6 +42,7 @@ class Server {
             await sequelize.sync();
             // await sequelize.models.User.sync({ force: true });
             // await Contacto.sync();
+            //await Usuario.sync();
             console.log("Todos los modelos fueron sincronizados correctamente".green);
         } catch (error) {
             console.error('Problema al conectrase o al sicronizar modelos'.red, error);
