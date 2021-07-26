@@ -53,7 +53,6 @@ const checkoutGet = (req, res) => {
     res.render('checkout')
 }
 
-<<<<<<< HEAD
 const productoGet = async (req, res) => {
     try {
         const categorias = await Categoria.findAll();
@@ -63,19 +62,10 @@ const productoGet = async (req, res) => {
     }
 
     
-=======
-const productoGet = (req, res) => {
-    fetch('https://api-mercado-tecla.herokuapp.com/api/categorias')
-        .then(res => res.json())
-        .then(json => {
-            res.render('add-producto', { categorias: json })
-        });
->>>>>>> a971815e748f6188f2310b669e2e37df5c13047a
 }
 
 const editProductoGet = async(req, res) => {
     const id_producto = req.query.id
-<<<<<<< HEAD
     try {
         const producto = await Producto.findOne({where: {id_producto} })
         const categorias = await Categoria.findAll();
@@ -93,24 +83,6 @@ const editProductoGet = async(req, res) => {
         res.status(400).json('No se pudo procesar tu solicitud');
         console.log(e);
     }
-=======
-    const producto = await Producto.findOne({ where: { id_producto } })
-
-    fetch('https://api-mercado-tecla.herokuapp.com/api/categorias')
-        .then(res => res.json())
-        .then(json => {
-            res.render('edit-producto', {
-                categorias: json,
-                id_producto,
-                nombre: producto.nombre,
-                precio: producto.precio,
-                cantidad: producto.cantidad,
-                imagen: producto.imagen,
-                categoria: producto.categoria,
-                descripcion: producto.descripcion,
-            })
-        });
->>>>>>> a971815e748f6188f2310b669e2e37df5c13047a
 }
 
 //INsertamos a la base de datos
@@ -362,11 +334,7 @@ const productos2Get = async(req, res) => {
     try {
         // const productos = await getProductosDisponibles()
         const productos = await Producto.findAll();
-<<<<<<< HEAD
         res.render('./admin/productos', { productos: productos})
-=======
-        res.render('productos', { productos: productos })
->>>>>>> a971815e748f6188f2310b669e2e37df5c13047a
     } catch (error) {
         res.status(400).json('Problema al solicitar tu peticion');
     }
