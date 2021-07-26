@@ -1,5 +1,6 @@
 const { response, request } = require('express')
 const { Contacto } = require('../models/contacto');
+const { Categoria } = require('../models/Categoria');
 const { Producto, getProductosDisponibles } = require('../models/Producto')
 const { Usuario } = require('../models/Usuario');
 const fetch = require('node-fetch');
@@ -50,32 +51,36 @@ const checkoutGet = (req, res) => {
     res.render('checkout')
 }
 
-const productoGet = (req, res) => {
-    fetch('https://api-mercado-tecla.herokuapp.com/api/categorias')
-        .then(res => res.json())
-        .then(json => {
-            res.render('add-producto', { categorias: json})
-        }); 
+const productoGet = async (req, res) => {
+    try {
+        const categorias = await Categoria.findAll();
+        res.render('./admin/add-producto', { categorias: categorias  })
+    } catch (error) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+    }
+
+    
 }
 
 const editProductoGet = async (req, res) => {
     const id_producto = req.query.id
-    const producto = await Producto.findOne({where: {id_producto} })
-
-    fetch('https://api-mercado-tecla.herokuapp.com/api/categorias')
-        .then(res => res.json())
-        .then(json => {
-            res.render('edit-producto', {
-                categorias: json,
-                id_producto, 
-                nombre: producto.nombre,
-                precio: producto.precio,
-                cantidad: producto.cantidad,
-                imagen: producto.imagen,
-                categoria: producto.categoria,
-                descripcion: producto.descripcion,
-            })
-        }); 
+    try {
+        const producto = await Producto.findOne({where: {id_producto} })
+        const categorias = await Categoria.findAll();
+        res.render('./admin/edit-producto', {
+            categorias: categorias,
+            id_producto, 
+            nombre: producto.nombre,
+            precio: producto.precio,
+            cantidad: producto.cantidad,
+            imagen: producto.imagen,
+            categoria: producto.categoria,
+            descripcion: producto.descripcion,
+        })
+    } catch (error) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+        console.log(e);
+    }
 }
 
 //INsertamos a la base de datos
@@ -224,7 +229,7 @@ const productos2Get = async(req, res) => {
     try {
         // const productos = await getProductosDisponibles()
         const productos = await Producto.findAll();
-        res.render('productos', { productos: productos})
+        res.render('./admin/productos', { productos: productos})
     } catch (error) {
         res.status(400).json('Problema al solicitar tu peticion');
     }

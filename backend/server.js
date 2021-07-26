@@ -73,9 +73,8 @@ class Server {
         this.app.use(this.apiPath, require('./routes/api.routes'))
             //entra a nuestro public donde hacemos el render del html (a futuro)
         this.app.use(this.publicPath, require('./routes/tienda.routes'))
-
-
-
+        /* Rutas Del CRUD administrador */
+        this.app.use(this.publicPath, require('./routes/admin.routes'))
     }
 
     //Este metodo es el listen escucha al puerto

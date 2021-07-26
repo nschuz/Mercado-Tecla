@@ -1,4 +1,3 @@
-//Este archivo es para un futuro
 const { Router } = require('express');
 const { body, check } = require('express-validator');
 const { validarCampos } = require('../middlewares/sumaErrores')
@@ -20,13 +19,6 @@ const {
     contacto2Get,
     contactoBorrar,
     contactoPut,
-    productoGet,
-    productoPost,
-    productosGet,
-    productos2Get,
-    editProductoGet,
-    productoPut,
-    productoBorrar,
     registroPost,
     registroPut,
 } = require('../controllers/tienda.controller')
@@ -41,8 +33,6 @@ router.get('/login', loginGet);
 router.get('/carrito', carritoGet)
 router.get('/contacto', contactoGet)
 router.get('/checkout', checkoutGet)
-router.get('/add-producto', productoGet)
-router.get('/productos/edit', editProductoGet)
 
 //insertar
 router.post('/contacto', [
@@ -74,41 +64,6 @@ router.delete('/contacto/:email', [
     validarCampos
 ], contactoBorrar);
 
-/* Rutas De Gestion de productos */
-
-// Crear un nuevo producto
-router.post('/productos', [
-    body('nombre', "El nombre es necesario").not().isEmpty(),
-    check('precio', "Verificar el precio").not().isEmpty().isFloat(),
-    check('descripcion', "Es necesaria la descripcion").not().isEmpty(),
-    check('cantidad', "Verificar la cantidad").not().isEmpty().isInt(),
-    check('imagen', "Es necesaria la imagen").not().isEmpty(),
-    check('categoria', "Es necesaria la categoria").not().isEmpty(),
-    validarCampos
-], productoPost);
-
-//Leer productos
-router.get('/productos-plain', productosGet);
-router.get('/productos', productos2Get);
-
-//Actualizar un producto(Usaremos POST de momento)
-router.post('/productos/edit/:id', [
-    body('nombre', "El nombre es necesario").not().isEmpty(),
-    check('precio', "Verificar el precio").not().isEmpty().isFloat(),
-    check('descripcion', "Es necesaria la descripcion").not().isEmpty(),
-    check('cantidad', "Verificar la cantidad").not().isEmpty().isInt(),
-    check('imagen', "Es necesaria la imagen").not().isEmpty(),
-    check('categoria', "Es necesaria la categoria").not().isEmpty(),
-    validarCampos
-], productoPut);
-
-//Eliminar un producto
-router.delete('/productos/:id', [
-    validarCampos
-], productoBorrar);
-//Eliminar un product (No METHOD)
-router.get('/productos/eliminar/:id', productoBorrar);
-
 /*Registro de usuarios*/
 //registramos un usuario
 router.post('/registro', [
@@ -139,8 +94,5 @@ router.post('/registro/:id', [
     .withMessage('Passwords comunes'),
     validarCampos,
 ], registroPut)
-
-
-
 
 module.exports = router;
