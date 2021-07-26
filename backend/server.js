@@ -7,8 +7,6 @@ const sequelize = require("./db/conexion");
 const morgan = require('morgan');
 const { Usuario } = require('./models/usuario');
 
-
-
 class Server {
 
     constructor() {
@@ -20,8 +18,6 @@ class Server {
         this.app.set('views', path.join(__dirname, '/views'));
         console.log(path.join(__dirname, '/views'));
         this.app.set('view engine', 'hbs');
-
-
 
         //Middlewares
         //Funaciones que añaden funcionalidad
@@ -51,14 +47,11 @@ class Server {
 
     middlewares() {
 
-
         //Cors
         this.app.use(cors())
 
         //Middleware Public
         this.app.use(express.static(path.join(__dirname, 'public')))
-
-
 
         //un middlware para recibir un json den el header - Lectura y parseo del body
         this.app.use(express.json())

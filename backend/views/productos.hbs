@@ -88,10 +88,13 @@
         <!-- end header section -->
     </div>
 
-    <!-- contact section -->
 
-    <section class="contact_section layout_padding">
+    <section class="layout_padding">
         <div class="container">
+            <div class="row">
+                <a class="btn btn-success btn-lg mx-auto" href="/tienda/add-producto"> Agregar Producto </a>
+            </div>
+            <br>
             <div class="row">
                 {{#each productos}}
                     <div class="card" style="width: 15rem; margin: 0 2px 0 2px;">
@@ -103,18 +106,21 @@
                                 <b>Descripcion:</b> {{descripcion}} <br>
                                 <b>Disponibles:</b> {{cantidad}}
                             </p>
-                            <form action="producto/{{id_producto}}?_method=DELETE" method="POST">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-dange" style="color: #fff;" type="submit">Eliminar</button>
-                            </form>
+                            <div class="align-items-end">
+                                <a class="btn btn-primary" href="productos/edit?id={{id_producto}}">Editar</a>
+                                <a href="productos/eliminar/{{id_producto}}" class="btn btn-danger" id="botonEliminar" style="color: #fff;" type="submit">Eliminar</a>
+                                {{!-- <form action="/ver-productos/{{id_producto}}?_method=DELETE" method="POST">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger" id="botonEliminar" style="color: #fff;" type="submit">Eliminar</button>
+                                </form> --}}
+                            </div>
+                                
                         </div> 
                     </div>
                 {{/each}}
             </div>
         </div>
     </section>
-
-    <!-- end contact section -->
 
     <!-- footer section -->
     <footer class="footer_section">

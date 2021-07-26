@@ -1,6 +1,8 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../db/conexion');
 
+const queryInterface = sequelize.getQueryInterface();
+
 const Producto = sequelize.define('producto', {
     id_producto: {
         type: Sequelize.INTEGER,
@@ -20,17 +22,13 @@ const Producto = sequelize.define('producto', {
         allowNull: false
     },
     cantidad: {
-        type: DataTypes.INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false
     },
     imagen: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    // stock: {
-    //     type: Sequelize.INTEGER,
-    //     allowNull: false
-    // },
     categoria: {
         type: Sequelize.STRING, //Llave foranea
         allowNull: false
@@ -43,4 +41,8 @@ Producto.sync().then(() => {
     console.log('table created');
 });
 
-module.exports = { Producto }
+const getProductosDisponibles = async () => {
+    const productos = await sequelize.query('SELECT * FROM productos WHERE cantidad > 0');
+    return productos;
+}
+module.exports = { Producto, getProductosDisponibles };

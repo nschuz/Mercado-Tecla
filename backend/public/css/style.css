@@ -6,6 +6,10 @@ body {
   overflow-x: hidden;
 }
 
+#botonGuardar{
+  background-color: #000;
+}
+
 .layout_padding {
   padding: 90px 0;
 }
