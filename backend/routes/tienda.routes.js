@@ -32,7 +32,11 @@ const {
     registroDelete,
     usuariosGet,
     loginPost,
-} = require('../controllers/tienda.controller')
+    adminGet,
+    userGet,
+} = require('../controllers/tienda.controller');
+const { validarJWT } = require('../middlewares/validarJWT');
+const { validarRol } = require('../middlewares/validarRol');
 
 router.get('/about', aboutGet);
 router.get('/home', homeGet);
@@ -130,7 +134,7 @@ router.post('/registro', [
 
 
 //Actualizar registro
-router.post('/registro/:id', [
+router.put('/registro/:id', [
     check('id').not().isEmpty(),
     body('nombre', "Nombre vacio").not().isEmpty(),
     body('nombre', "El nombre no pude llevar numeros").not().isNumeric(),
@@ -149,7 +153,10 @@ router.delete('/registro/', [
     validarCampos,
 ], registroDelete)
 
-router.get('/usuarios', usuariosGet);
+router.get('/admin/registros', [
+    validarJWT,
+    validarRol
+], usuariosGet);
 
 
 
@@ -162,6 +169,15 @@ router.post('/login', [
     validarCampos
 
 ], loginPost);
+
+router.get('/admin', [
+    validarJWT,
+    validarRol
+], adminGet);
+
+router.get('/user', [
+    validarJWT,
+], userGet);
 
 
 

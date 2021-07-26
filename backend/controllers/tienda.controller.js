@@ -5,6 +5,8 @@ const { Usuario } = require('../models/Usuario');
 const fetch = require('node-fetch');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
+const { crearJWT } = require('../services/crearJWT.service');
+const jwt = require('jsonwebtoken')
 
 
 
@@ -54,20 +56,20 @@ const productoGet = (req, res) => {
     fetch('https://api-mercado-tecla.herokuapp.com/api/categorias')
         .then(res => res.json())
         .then(json => {
-            res.render('add-producto', { categorias: json})
-        }); 
+            res.render('add-producto', { categorias: json })
+        });
 }
 
-const editProductoGet = async (req, res) => {
+const editProductoGet = async(req, res) => {
     const id_producto = req.query.id
-    const producto = await Producto.findOne({where: {id_producto} })
+    const producto = await Producto.findOne({ where: { id_producto } })
 
     fetch('https://api-mercado-tecla.herokuapp.com/api/categorias')
         .then(res => res.json())
         .then(json => {
             res.render('edit-producto', {
                 categorias: json,
-                id_producto, 
+                id_producto,
                 nombre: producto.nombre,
                 precio: producto.precio,
                 cantidad: producto.cantidad,
@@ -75,7 +77,7 @@ const editProductoGet = async (req, res) => {
                 categoria: producto.categoria,
                 descripcion: producto.descripcion,
             })
-        }); 
+        });
 }
 
 //INsertamos a la base de datos
@@ -243,9 +245,48 @@ const loginPost = async(req, res) => {
     }
 
 
-    res.json('Bienvenido')
+    const token = await crearJWT(usuario.dataValues.id_unico);
+
+    const isAdmin = usuario.dataValues.tipo_usuario;
+    if (isAdmin == "admin") {
+        //res.cookie('acces-token', token, { path: '/admin' }).render('admin')
+        // res.cookie('token', token).redirect('/tienda/admin')
+        res.cookie('token', token).redirect('/tienda/admin')
+    } else {
+        res.cookie('token', token).redirect('/tienda/user')
+    }
 
 
+
+
+
+
+
+
+
+}
+const adminGet = async(req, res) => {
+    const token2 = req.cookies.token;
+    const { uid } = jwt.verify(token2, 'secretkey')
+    const usuario = await Usuario.findOne({ where: { id_unico: uid } })
+    let nombre = usuario.dataValues.nombre;
+    nombre = nombre.toUpperCase();
+
+    res.render('admin', {
+        nombre
+    });
+}
+const userGet = async(req, res) => {
+    const token2 = req.cookies.token;
+    const { uid } = jwt.verify(token2, 'secretkey')
+    const usuario = await Usuario.findOne({ where: { id_unico: uid } })
+    let nombre = usuario.dataValues.nombre;
+    nombre = nombre.toUpperCase();
+
+
+    res.render('user', {
+        nombre
+    })
 }
 
 
@@ -281,13 +322,14 @@ const productosGet = async(req, res) => {
         res.status(400).json('Problema al solicitar tu peticion');
         console.log(e);
     }
+
 }
 
 const productos2Get = async(req, res) => {
     try {
         // const productos = await getProductosDisponibles()
         const productos = await Producto.findAll();
-        res.render('productos', { productos: productos})
+        res.render('productos', { productos: productos })
     } catch (error) {
         res.status(400).json('Problema al solicitar tu peticion');
     }
@@ -342,6 +384,8 @@ module.exports = {
     registroPut,
     registroDelete,
     usuariosGet,
-    loginPost
+    loginPost,
+    adminGet,
+    userGet
 
 }
