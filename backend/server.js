@@ -13,6 +13,7 @@ class Server {
 
     constructor() {
         this.app = express()
+
         this.port = process.env.PORT
             //aqui colocamos nuestros paths
         this.apiPath = '/api/'
@@ -32,6 +33,7 @@ class Server {
         this.routes()
 
         this.conectarDB();
+
 
     }
 
@@ -54,6 +56,9 @@ class Server {
 
         //Cors
         this.app.use(cors())
+
+        //passportf 
+
 
         //Middleware Public
         this.app.use(express.static(path.join(__dirname, 'public')))

@@ -147,6 +147,12 @@ const registroPut = async(req, res) => {
     const { nombre, apellido, email, password, date } = req.body;
     const { id } = req.params;
 
+    const activo = await Usuario.findAll({ where: { id_unico: id, } });
+
+    if (!activo[0].dataValues.activo) {
+        return res.status(400).json("No se puede actualizar un usuario inabilatado") //no se puede borrar un usuario inactivo
+    }
+
     try {
         const passHas = await bcrypt.hash(password, 10);
         Usuario.update({ nombre, apellido, email, password: passHas }, { where: { id_unico: id } });
@@ -158,7 +164,64 @@ const registroPut = async(req, res) => {
 
 }
 
+//Borramos un usuario
+const registroDelete = async(req, res) => {
 
+    const { id } = req.body;
+
+    const activo = await Usuario.findAll({ where: { id_unico: id, } });
+    console.log(activo);
+
+    if (!activo[0].dataValues.activo) {
+        return res.status(400).json("Contacte al administrador") //no se puede borrar un usuario inactivo
+    }
+
+    try {
+        Usuario.update({ activo: false }, { where: { id_unico: id } });
+        res.status(200).json("Datos actaulizados");
+    } catch (e) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+        console.log(e);
+    }
+
+}
+
+//get usuarios 
+const usuariosGet = async(req, res) => {
+    try {
+        const usuarios = await Usuario.findAll();
+
+        res.status(200).json(usuarios);
+    } catch (e) {
+        res.status(400).json('Problema al solicitar tu peticion');
+        console.log(e);
+    }
+
+}
+
+/* Controladores Login*/
+const loginPost = async(req, res) => {
+    const { email, password } = req.body;
+    //verificamos el correo exista 
+    const usuario = await Usuario.findOne({ where: { email } });
+    if (!usuario) {
+        return res.status(400).json('Usuario/Password erroneo')
+    }
+
+    //verificamos el password sea correcto 
+    //validar password 
+    const passwordDB = usuario.dataValues.password;
+    const passwordCorecto = bcrypt.compareSync(password, passwordDB);
+    console.log("passoword ", passwordCorecto);
+    if (!passwordCorecto) {
+        return res.status(400).json('Usuario/Password erroneos')
+    }
+
+
+    res.json('Bienvenido')
+
+
+}
 
 
 
@@ -247,4 +310,8 @@ module.exports = {
     productoBorrar,
     registroPost,
     registroPut,
+    registroDelete,
+    usuariosGet,
+    loginPost
+
 }

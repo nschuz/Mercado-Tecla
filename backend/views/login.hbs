@@ -78,7 +78,7 @@
                     </div>
                     <div class="login-wrapper my-auto">
                         <h1 class="login-title">Log in</h1>
-                        <form action="#!">
+                        <form method="post" action="/tienda/login">
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" name="email" id="email" class="form-control" placeholder="email@example.com">
@@ -87,7 +87,7 @@
                                 <label for="password">Password</label>
                                 <input type="password" name="password" id="password" class="form-control" placeholder="enter your passsword">
                             </div>
-                            <input name="login" id="login" class="btn btn-block login-btn" type="button" value="Login">
+                            <input name="login" id="login" class="btn btn-block login-btn" type="submit" value="Login">
                         </form>
                         <a href="/tienda/restablecer-password" class="forgot-password-link">Olvide Contraseña?</a>
                         <p class="login-wrapper-footer-text">No tienes cuenta? <a href="/tienda/registro" class="text-reset">Registrame Aqui</a></p>
