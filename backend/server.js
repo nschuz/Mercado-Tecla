@@ -6,11 +6,13 @@ const { apiLimiter } = require('./middlewares/funciones')
 const sequelize = require("./db/conexion");
 const morgan = require('morgan');
 const { Usuario } = require('./models/usuario');
+const cookieParser = require('cookie-parser')
 
 class Server {
 
     constructor() {
         this.app = express()
+
         this.port = process.env.PORT
             //aqui colocamos nuestros paths
         this.apiPath = '/api/'
@@ -28,6 +30,7 @@ class Server {
         this.routes()
 
         this.conectarDB();
+
 
     }
 
@@ -50,6 +53,9 @@ class Server {
         //Cors
         this.app.use(cors())
 
+        //passportf 
+
+
         //Middleware Public
         this.app.use(express.static(path.join(__dirname, 'public')))
 
@@ -61,6 +67,10 @@ class Server {
         this.app.use(apiLimiter)
 
         this.app.use(morgan('combined'))
+
+        //CookieParser
+        this.app.use(cookieParser());
+
 
 
     }

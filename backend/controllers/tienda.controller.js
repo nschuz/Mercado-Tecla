@@ -6,6 +6,8 @@ const { Usuario } = require('../models/Usuario');
 const fetch = require('node-fetch');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
+const { crearJWT } = require('../services/crearJWT.service');
+const jwt = require('jsonwebtoken')
 
 
 
@@ -51,6 +53,7 @@ const checkoutGet = (req, res) => {
     res.render('checkout')
 }
 
+<<<<<<< HEAD
 const productoGet = async (req, res) => {
     try {
         const categorias = await Categoria.findAll();
@@ -60,10 +63,19 @@ const productoGet = async (req, res) => {
     }
 
     
+=======
+const productoGet = (req, res) => {
+    fetch('https://api-mercado-tecla.herokuapp.com/api/categorias')
+        .then(res => res.json())
+        .then(json => {
+            res.render('add-producto', { categorias: json })
+        });
+>>>>>>> a971815e748f6188f2310b669e2e37df5c13047a
 }
 
-const editProductoGet = async (req, res) => {
+const editProductoGet = async(req, res) => {
     const id_producto = req.query.id
+<<<<<<< HEAD
     try {
         const producto = await Producto.findOne({where: {id_producto} })
         const categorias = await Categoria.findAll();
@@ -81,6 +93,24 @@ const editProductoGet = async (req, res) => {
         res.status(400).json('No se pudo procesar tu solicitud');
         console.log(e);
     }
+=======
+    const producto = await Producto.findOne({ where: { id_producto } })
+
+    fetch('https://api-mercado-tecla.herokuapp.com/api/categorias')
+        .then(res => res.json())
+        .then(json => {
+            res.render('edit-producto', {
+                categorias: json,
+                id_producto,
+                nombre: producto.nombre,
+                precio: producto.precio,
+                cantidad: producto.cantidad,
+                imagen: producto.imagen,
+                categoria: producto.categoria,
+                descripcion: producto.descripcion,
+            })
+        });
+>>>>>>> a971815e748f6188f2310b669e2e37df5c13047a
 }
 
 //INsertamos a la base de datos
@@ -177,6 +207,12 @@ const registroPut = async(req, res) => {
     const { nombre, apellido, email, password, date } = req.body;
     const { id } = req.params;
 
+    const activo = await Usuario.findAll({ where: { id_unico: id, } });
+
+    if (!activo[0].dataValues.activo) {
+        return res.status(400).json("No se puede actualizar un usuario inabilatado") //no se puede borrar un usuario inactivo
+    }
+
     try {
         const passHas = await bcrypt.hash(password, 10);
         Usuario.update({ nombre, apellido, email, password: passHas }, { where: { id_unico: id } });
@@ -188,7 +224,103 @@ const registroPut = async(req, res) => {
 
 }
 
+//Borramos un usuario
+const registroDelete = async(req, res) => {
 
+    const { id } = req.body;
+
+    const activo = await Usuario.findAll({ where: { id_unico: id, } });
+    console.log(activo);
+
+    if (!activo[0].dataValues.activo) {
+        return res.status(400).json("Contacte al administrador") //no se puede borrar un usuario inactivo
+    }
+
+    try {
+        Usuario.update({ activo: false }, { where: { id_unico: id } });
+        res.status(200).json("Datos actaulizados");
+    } catch (e) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+        console.log(e);
+    }
+
+}
+
+//get usuarios 
+const usuariosGet = async(req, res) => {
+    try {
+        const usuarios = await Usuario.findAll();
+
+        res.status(200).json(usuarios);
+    } catch (e) {
+        res.status(400).json('Problema al solicitar tu peticion');
+        console.log(e);
+    }
+
+}
+
+/* Controladores Login*/
+const loginPost = async(req, res) => {
+    const { email, password } = req.body;
+    //verificamos el correo exista 
+    const usuario = await Usuario.findOne({ where: { email } });
+    if (!usuario) {
+        return res.status(400).json('Usuario/Password erroneo')
+    }
+
+    //verificamos el password sea correcto 
+    //validar password 
+    const passwordDB = usuario.dataValues.password;
+    const passwordCorecto = bcrypt.compareSync(password, passwordDB);
+    console.log("passoword ", passwordCorecto);
+    if (!passwordCorecto) {
+        return res.status(400).json('Usuario/Password erroneos')
+    }
+
+
+    const token = await crearJWT(usuario.dataValues.id_unico);
+
+    const isAdmin = usuario.dataValues.tipo_usuario;
+    if (isAdmin == "admin") {
+        //res.cookie('acces-token', token, { path: '/admin' }).render('admin')
+        // res.cookie('token', token).redirect('/tienda/admin')
+        res.cookie('token', token).redirect('/tienda/admin')
+    } else {
+        res.cookie('token', token).redirect('/tienda/user')
+    }
+
+
+
+
+
+
+
+
+
+}
+const adminGet = async(req, res) => {
+    const token2 = req.cookies.token;
+    const { uid } = jwt.verify(token2, 'secretkey')
+    const usuario = await Usuario.findOne({ where: { id_unico: uid } })
+    let nombre = usuario.dataValues.nombre;
+    nombre = nombre.toUpperCase();
+
+    res.render('admin', {
+        nombre
+    });
+}
+const userGet = async(req, res) => {
+    const token2 = req.cookies.token;
+    const { uid } = jwt.verify(token2, 'secretkey')
+    const usuario = await Usuario.findOne({ where: { id_unico: uid } })
+    let nombre = usuario.dataValues.nombre;
+    nombre = nombre.toUpperCase();
+
+
+    res.render('user', {
+        nombre
+    })
+}
 
 
 
@@ -223,13 +355,18 @@ const productosGet = async(req, res) => {
         res.status(400).json('Problema al solicitar tu peticion');
         console.log(e);
     }
+
 }
 
 const productos2Get = async(req, res) => {
     try {
         // const productos = await getProductosDisponibles()
         const productos = await Producto.findAll();
+<<<<<<< HEAD
         res.render('./admin/productos', { productos: productos})
+=======
+        res.render('productos', { productos: productos })
+>>>>>>> a971815e748f6188f2310b669e2e37df5c13047a
     } catch (error) {
         res.status(400).json('Problema al solicitar tu peticion');
     }
@@ -282,4 +419,10 @@ module.exports = {
     editProductoGet,
     registroPost,
     registroPut,
+    registroDelete,
+    usuariosGet,
+    loginPost,
+    adminGet,
+    userGet
+
 }
