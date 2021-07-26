@@ -102,4 +102,38 @@ router.put('/registro/:id', [
     validarCampos,
 ], registroPut)
 
+router.delete('/registro/', [
+    body('id').custom(idExiste),
+    validarCampos,
+], registroDelete)
+
+router.get('/admin/registros', [
+    validarJWT,
+    validarRol
+], usuariosGet);
+
+
+
+/*login  de usuarios*/
+router.post('/login', [
+    body('email', "Email vacio").not().isEmpty(),
+    body('email', "Tu email no tiene formato de email").isEmail(),
+    check('email', "El email  no existe en la base de datos").custom(emailNoExiste),
+    body('password', "El campo password no debe estra vacio").not().isEmpty(),
+    validarCampos
+
+], loginPost);
+
+router.get('/admin', [
+    validarJWT,
+    validarRol
+], adminGet);
+
+router.get('/user', [
+    validarJWT,
+], userGet);
+
+
+
+
 module.exports = router;
