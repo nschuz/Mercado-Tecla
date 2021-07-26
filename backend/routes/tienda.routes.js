@@ -24,6 +24,7 @@ const {
     productoPost,
     productosGet,
     productos2Get,
+    editProductoGet,
     productoPut,
     productoBorrar,
     registroPost,
@@ -44,6 +45,7 @@ router.get('/carrito', carritoGet)
 router.get('/contacto', contactoGet)
 router.get('/checkout', checkoutGet)
 router.get('/add-producto', productoGet)
+router.get('/productos/edit', editProductoGet)
 
 //insertar
 router.post('/contacto', [
@@ -78,7 +80,7 @@ router.delete('/contacto/:email', [
 /* Rutas De Gestion de productos */
 
 // Crear un nuevo producto
-router.post('/producto', [
+router.post('/productos', [
     body('nombre', "El nombre es necesario").not().isEmpty(),
     check('precio', "Verificar el precio").not().isEmpty().isFloat(),
     check('descripcion', "Es necesaria la descripcion").not().isEmpty(),
@@ -89,13 +91,12 @@ router.post('/producto', [
 ], productoPost);
 
 //Leer productos
-router.get('/productos', productosGet);
-router.get('/ver-productos', productos2Get);
+router.get('/productos-plain', productosGet);
+router.get('/productos', productos2Get);
 
-//Actualizar un producto
-router.put('/producto/:id', [
+//Actualizar un producto(Usaremos POST de momento)
+router.post('/productos/edit/:id', [
     body('nombre', "El nombre es necesario").not().isEmpty(),
-    // check('email').custom(emailExiste),
     check('precio', "Verificar el precio").not().isEmpty().isFloat(),
     check('descripcion', "Es necesaria la descripcion").not().isEmpty(),
     check('cantidad', "Verificar la cantidad").not().isEmpty().isInt(),
@@ -105,11 +106,11 @@ router.put('/producto/:id', [
 ], productoPut);
 
 //Eliminar un producto
-router.delete('/producto/:id', [
+router.delete('/productos/:id', [
     validarCampos
 ], productoBorrar);
-
-
+//Eliminar un product (No METHOD)
+router.get('/productos/eliminar/:id', productoBorrar);
 
 /*Registro de usuarios*/
 //registramos un usuario
@@ -129,8 +130,8 @@ router.post('/registro', [
 
 
 //Actualizar registro
-router.put('/registro/:id', [
-    check('id').custom(idExiste),
+router.post('/registro/:id', [
+    check('id').not().isEmpty(),
     body('nombre', "Nombre vacio").not().isEmpty(),
     body('nombre', "El nombre no pude llevar numeros").not().isNumeric(),
     body('apellido', "El apellido no pude llevar numeros").not().isNumeric(),
