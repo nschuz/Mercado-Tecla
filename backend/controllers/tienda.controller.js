@@ -46,7 +46,44 @@ const checkoutGet = (req, res) => {
     res.render('checkout')
 }
 
+<<<<<<< HEAD
 //INsertamos a la base de datos
+=======
+const productoGet = async (req, res) => {
+    try {
+        const categorias = await Categoria.findAll();
+        res.render('./admin/add-producto', { categorias: categorias  })
+    } catch (error) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+    }
+
+    
+}
+
+const editProductoGet = async(req, res) => {
+    const id_producto = req.query.id
+    try {
+        const producto = await Producto.findOne({where: {id_producto} })
+        const categorias = await Categoria.findAll();
+        res.render('./admin/edit-producto', {
+            categorias: categorias,
+            id_producto, 
+            nombre: producto.nombre,
+            precio: producto.precio,
+            cantidad: producto.cantidad,
+            imagen: producto.imagen,
+            categoria: producto.categoria,
+            descripcion: producto.descripcion,
+        })
+    } catch (error) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+        console.log(e);
+    }
+}
+
+/*CRUD DE PRUEBA PARA CONTACTO*/
+///sertamos a la base de datos
+>>>>>>> 67201455e1baf2d4600be67246dfcd933c531f2a
 const contactoPost = async(req, res) => {
     const { nombre, telefono, email, mensaje } = req.body;
     try {
@@ -103,7 +140,7 @@ const contacto2Get = async(req, res) => {
     }
 }
 
-/*Controles registro usuario */
+/******Controles registro usuario *******/
 //Insertamos un usuario a la base de datos
 const registroPost = async(req, res) => {
     const { nombre, apellido, email, password, date } = req.body;
@@ -191,6 +228,7 @@ const usuariosGet = async(req, res) => {
     }
 
 }
+
 
 /* Controladores Login*/
 const loginPost = async(req, res) => {
