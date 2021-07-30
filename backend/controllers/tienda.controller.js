@@ -46,28 +46,25 @@ const checkoutGet = (req, res) => {
     res.render('checkout')
 }
 
-<<<<<<< HEAD
-//INsertamos a la base de datos
-=======
-const productoGet = async (req, res) => {
+const productoGet = async(req, res) => {
     try {
         const categorias = await Categoria.findAll();
-        res.render('./admin/add-producto', { categorias: categorias  })
+        res.render('./admin/add-producto', { categorias: categorias })
     } catch (error) {
         res.status(400).json('No se pudo procesar tu solicitud');
     }
 
-    
+
 }
 
 const editProductoGet = async(req, res) => {
     const id_producto = req.query.id
     try {
-        const producto = await Producto.findOne({where: {id_producto} })
+        const producto = await Producto.findOne({ where: { id_producto } })
         const categorias = await Categoria.findAll();
         res.render('./admin/edit-producto', {
             categorias: categorias,
-            id_producto, 
+            id_producto,
             nombre: producto.nombre,
             precio: producto.precio,
             cantidad: producto.cantidad,
@@ -83,7 +80,6 @@ const editProductoGet = async(req, res) => {
 
 /*CRUD DE PRUEBA PARA CONTACTO*/
 ///sertamos a la base de datos
->>>>>>> 67201455e1baf2d4600be67246dfcd933c531f2a
 const contactoPost = async(req, res) => {
     const { nombre, telefono, email, mensaje } = req.body;
     try {
@@ -309,5 +305,4 @@ module.exports = {
     loginPost,
     adminGet,
     userGet
-
 }
