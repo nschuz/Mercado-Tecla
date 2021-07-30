@@ -1,4 +1,3 @@
-const { response, request } = require('express')
 const { Contacto } = require('../models/contacto');
 const { Usuario } = require('../models/Usuario');
 const bcrypt = require('bcrypt');
