@@ -12,7 +12,6 @@ class Server {
 
     constructor() {
         this.app = express()
-
         this.port = process.env.PORT
             //aqui colocamos nuestros paths
         this.apiPath = '/api/'
@@ -30,7 +29,6 @@ class Server {
         this.routes()
 
         this.conectarDB();
-
 
     }
 
@@ -53,9 +51,6 @@ class Server {
         //Cors
         this.app.use(cors())
 
-
-
-
         //Middleware Public
         this.app.use(express.static(path.join(__dirname, 'public')))
 
@@ -71,8 +66,6 @@ class Server {
         //CookieParser
         this.app.use(cookieParser());
 
-
-
     }
 
 
@@ -83,9 +76,8 @@ class Server {
         this.app.use(this.apiPath, require('./routes/api.routes'))
             //entra a nuestro public donde hacemos el render del html (a futuro)
         this.app.use(this.publicPath, require('./routes/tienda.routes'))
-
-
-
+            /* Rutas Del CRUD administrador */
+        this.app.use(this.publicPath, require('./routes/admin.routes'))
     }
 
     //Este metodo es el listen escucha al puerto
