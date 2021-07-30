@@ -3,7 +3,7 @@ const tbody = document.querySelector('#tablaBody');
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    consultarUsuarios('https://teclanode.azurewebsites.net');
+    consultarUsuarios('https://teclanode.azurewebsites.net/tienda/admin/registros');
 });
 
 
