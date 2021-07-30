@@ -25,7 +25,7 @@
 
      async consultarAPI(producto) {
          this.producto = this.search.value;
-         const response = await fetch(`https://api-mercado-tecla.herokuapp.com/api/productos/${this.producto}`);
+         const response = await fetch(`https://teclanode.azurewebsites.net/api/productos/${this.producto}`);
          const productos = await response.json();
          console.log(productos);
          return productos;

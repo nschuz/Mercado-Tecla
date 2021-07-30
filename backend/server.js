@@ -25,7 +25,7 @@ class Server {
         this.middlewares();
 
 
-        //Rutas de mi apliccion
+        //Rutas de mi apliccion sd
         this.routes()
 
         this.conectarDB();
