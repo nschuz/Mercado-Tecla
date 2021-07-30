@@ -78,6 +78,8 @@ class Server {
         this.app.use(this.publicPath, require('./routes/tienda.routes'))
         /* Rutas Del CRUD administrador */
         this.app.use(this.publicPath, require('./routes/admin.routes'))
+        /* Rutas para las categorias */
+        this.app.use(this.publicPath, require('./routes/categorias.routes'))
     }
 
     //Este metodo es el listen escucha al puerto

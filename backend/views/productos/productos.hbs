@@ -92,7 +92,7 @@
     <section class="layout_padding">
         <div class="container">
             <div class="row">
-                <a class="btn btn-success btn-lg mx-auto" href="/tienda/add-producto"> Agregar Producto </a>
+                <a class="btn btn-success btn-lg mx-auto" href="/tienda/admin/add-producto"> Agregar Producto </a>
             </div>
             <br>
             <div class="row">
@@ -107,7 +107,7 @@
                                 <b>Disponibles:</b> {{cantidad}}
                             </p>
                             <div class="align-items-end">
-                                <a class="btn btn-primary" href="productos/edit?id={{id_producto}}">Editar</a>
+                                <a class="btn btn-primary" href="/tienda/admin/productos/edit?id={{id_producto}}">Editar</a>
                                 <a href="productos/eliminar/{{id_producto}}" class="btn btn-danger" id="botonEliminar" style="color: #fff;" type="submit">Eliminar</a>
                                 {{!-- <form action="/ver-productos/{{id_producto}}?_method=DELETE" method="POST">
                                     <input type="hidden" name="_method" value="DELETE">
