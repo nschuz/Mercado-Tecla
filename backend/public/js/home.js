@@ -1,4 +1,4 @@
-const URL_CATEGORIAS = `https://api-mercado-tecla.herokuapp.com/api/categorias`
+const URL_CATEGORIAS = `https://teclanode.azurewebsites.net/api/categorias`
     //Te regresa los productos dependiendo la categoria 
 const URL_PRODUCTOS = `https://api.mercadolibre.com/sites/MLM/search?category=`;
 
