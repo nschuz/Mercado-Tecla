@@ -80,7 +80,8 @@ const editProductoGet = async(req, res) => {
         });
 }
 
-//INsertamos a la base de datos
+/*CRUD DE PRUEBA PARA CONTACTO*/
+///sertamos a la base de datos
 const contactoPost = async(req, res) => {
     const { nombre, telefono, email, mensaje } = req.body;
     try {
@@ -137,7 +138,7 @@ const contacto2Get = async(req, res) => {
     }
 }
 
-/*Controles registro usuario */
+/******Controles registro usuario *******/
 //Insertamos un usuario a la base de datos
 const registroPost = async(req, res) => {
     const { nombre, apellido, email, password, date } = req.body;
@@ -225,6 +226,7 @@ const usuariosGet = async(req, res) => {
     }
 
 }
+
 
 /* Controladores Login*/
 const loginPost = async(req, res) => {

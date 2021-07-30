@@ -53,7 +53,7 @@ class Server {
         //Cors
         this.app.use(cors())
 
-        //passportf 
+
 
 
         //Middleware Public
