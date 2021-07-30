@@ -26,6 +26,7 @@ const {
     loginPost,
     adminGet,
     userGet,
+    olvidepasswordPost,
 } = require('../controllers/tienda.controller');
 const { validarJWT } = require('../middlewares/validarJWT');
 const { validarRol } = require('../middlewares/validarRol');
@@ -40,6 +41,7 @@ router.get('/login', loginGet);
 router.get('/carrito', carritoGet)
 router.get('/contacto', contactoGet)
 router.get('/checkout', checkoutGet)
+
 
 //insertar
 router.post('/contacto', [
@@ -134,6 +136,8 @@ router.get('/user', [
 ], userGet);
 
 
+//restablcer passwordCorrecto
+router.post('/restablecer-password', olvidepasswordPost)
 
 
 module.exports = router;
