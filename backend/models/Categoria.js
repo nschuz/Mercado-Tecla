@@ -3,9 +3,8 @@ const sequelize = require('../db/conexion');
 
 const Categoria = sequelize.define('categoria', {
     id_categoria: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         primaryKey: true,
-        autoIncrement: true
     },
     titulo: {
         type: Sequelize.STRING,

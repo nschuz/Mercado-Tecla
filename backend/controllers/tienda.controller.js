@@ -1,17 +1,10 @@
 const { response, request } = require('express')
 const { Contacto } = require('../models/contacto');
-const { Categoria } = require('../models/Categoria');
-const { Producto, getProductosDisponibles } = require('../models/Producto')
 const { Usuario } = require('../models/Usuario');
-const fetch = require('node-fetch');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const { crearJWT } = require('../services/crearJWT.service');
 const jwt = require('jsonwebtoken')
-
-
-
-
 
 const aboutGet = (req, res) => {
     res.render('about')
@@ -53,6 +46,9 @@ const checkoutGet = (req, res) => {
     res.render('checkout')
 }
 
+<<<<<<< HEAD
+//INsertamos a la base de datos
+=======
 const productoGet = async (req, res) => {
     try {
         const categorias = await Categoria.findAll();
@@ -87,6 +83,7 @@ const editProductoGet = async(req, res) => {
 
 /*CRUD DE PRUEBA PARA CONTACTO*/
 ///sertamos a la base de datos
+>>>>>>> 67201455e1baf2d4600be67246dfcd933c531f2a
 const contactoPost = async(req, res) => {
     const { nombre, telefono, email, mensaje } = req.body;
     try {
@@ -262,16 +259,9 @@ const loginPost = async(req, res) => {
     } else {
         res.cookie('token', token).redirect('/tienda/user')
     }
-
-
-
-
-
-
-
-
-
 }
+
+
 const adminGet = async(req, res) => {
     const token2 = req.cookies.token;
     const { uid } = jwt.verify(token2, 'secretkey')
@@ -297,74 +287,6 @@ const userGet = async(req, res) => {
 }
 
 
-
-/* Controles de productos*/
-
-//Insertamos un producto nuevo a la base de datos.
-const productoPost = async(req, res) => {
-    const { nombre, precio, descripcion, cantidad, imagen, categoria } = req.body;
-    try {
-        const producto = await Producto.create({
-            nombre,
-            precio,
-            descripcion,
-            cantidad,
-            imagen,
-            categoria,
-        })
-        res.status(200).redirect('/tienda/productos');
-
-    } catch (e) {
-        res.status(400).json('No se pudo procesar tu solicitud');
-        console.log(e);
-    }
-}
-
-//Obtenemos los productos de la db
-const productosGet = async(req, res) => {
-    try {
-        const productos = await Producto.findAll();
-        res.status(200).json(productos);
-    } catch (e) {
-        res.status(400).json('Problema al solicitar tu peticion');
-        console.log(e);
-    }
-
-}
-
-const productos2Get = async(req, res) => {
-    try {
-        // const productos = await getProductosDisponibles()
-        const productos = await Producto.findAll();
-        res.render('./admin/productos', { productos: productos})
-    } catch (error) {
-        res.status(400).json('Problema al solicitar tu peticion');
-    }
-}
-
-//Actalizamos un producto
-const productoPut = async(req, res) => {
-    const { nombre, precio, descripcion, cantidad, imagen, categoria } = req.body;
-    let id_producto = req.params.id;
-    try {
-        await Producto.update({ nombre, precio, descripcion, cantidad, imagen, categoria }, { where: { id_producto } });
-        res.status(200).redirect('/tienda/productos');
-    } catch (e) {
-        res.status(400).json('No se pudo procesar tu solicitud');
-    }
-}
-
-//Borramos algun producto
-const productoBorrar = async(req, res) => {
-    try {
-        const id_producto = req.params.id;
-        await Producto.destroy({ where: { id_producto } })
-        res.redirect('/tienda/productos')
-    } catch (e) {
-        res.status(400).json("No se pudo procesaro la solicitud");
-    }
-}
-
 module.exports = {
     aboutGet,
     homeGet,
@@ -380,13 +302,6 @@ module.exports = {
     contacto2Get,
     contactoBorrar,
     contactoPut,
-    productoGet,
-    productoPost,
-    productosGet,
-    productos2Get,
-    productoPut,
-    productoBorrar,
-    editProductoGet,
     registroPost,
     registroPut,
     registroDelete,
