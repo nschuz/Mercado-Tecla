@@ -17,7 +17,8 @@ const {
     productoPut,
     productoBorrar,
     registroEmailDelete,
-    updateUserPut
+    updateUserPut,
+    redirectType
 } = require('../controllers/admin.controller');
 
 const { validarJWT } = require('../middlewares/validarJWT');

@@ -152,6 +152,19 @@ const productoBorrar = async(req, res) => {
     }
 }
 
+/* Funcion que redirige segun el usuario logeado */
+const redirectType = async(req, res) => {
+    const token2 = req.cookies.token;
+    const { uid } = jwt.verify(token2, 'secretkey')
+    const usuario = await Usuario.findOne({ where: { id_unico: uid } })
+    let tipo = usuario.dataValues.tipo_usuario;
+    if(tipo === 'admin') {
+        res.redirect('/tienda/admin')
+    } else {
+        res.redirect('/tienda/user')
+    }
+}
+
 //borramos usuario by email 
 const registroEmailDelete = async(req, res) => {
     const { email } = req.params;
@@ -248,5 +261,5 @@ module.exports = {
     productoBorrar,
     registroEmailDelete,
     updateUserPut,
-
+    redirectType
 }
