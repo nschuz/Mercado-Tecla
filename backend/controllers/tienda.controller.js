@@ -7,12 +7,14 @@ const jwt = require('jsonwebtoken')
 const nodemailer = require("nodemailer");
 const { generatePassword } = require('../services/generatePassword.service');
 
+let loged = false;
+
 const aboutGet = (req, res) => {
     res.render('about')
 }
 
 const homeGet = (req, res) => {
-    res.render('index')
+    res.render('index', { loged })
 }
 
 const redirectGet = (req, res) => {
@@ -41,10 +43,6 @@ const carritoGet = (req, res) => {
 
 const contactoGet = (req, res) => {
     res.render('contact')
-}
-
-const checkoutGet = (req, res) => {
-    res.render('checkout')
 }
 
 //INsertamos a la base de datos
@@ -207,7 +205,7 @@ const loginPost = async(req, res) => {
     //validar password 
     const passwordDB = usuario.dataValues.password;
     const passwordCorecto = bcrypt.compareSync(password, passwordDB);
-    console.log("passoword ", passwordCorecto);
+    console.log("password ", passwordCorecto);
     if (!passwordCorecto) {
         return res.status(400).json('Usuario/Password erroneos')
     }
@@ -216,6 +214,7 @@ const loginPost = async(req, res) => {
     const token = await crearJWT(usuario.dataValues.id_unico);
 
     const isAdmin = usuario.dataValues.tipo_usuario;
+    loged = true;
     if (isAdmin == "admin") {
         //res.cookie('acces-token', token, { path: '/admin' }).render('admin')
         // res.cookie('token', token).redirect('/tienda/admin')
@@ -318,7 +317,6 @@ module.exports = {
     loginGet,
     carritoGet,
     contactoGet,
-    checkoutGet,
     contactoPost,
     contacto2Get,
     contactoBorrar,

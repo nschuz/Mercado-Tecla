@@ -40,8 +40,6 @@ router.get('/restablecer-password', olvidepasswordGet)
 router.get('/login', loginGet);
 router.get('/carrito', carritoGet)
 router.get('/contacto', contactoGet)
-router.get('/checkout', checkoutGet)
-
 
 //insertar
 router.post('/contacto', [

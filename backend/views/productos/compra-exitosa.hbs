@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,6 +14,8 @@
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
 
     <title>Tecla Mercado</title>
+
+
     <!-- bootstrap core css -->
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
     <!--owl slider stylesheet -->
@@ -27,11 +29,14 @@
     <link href="/css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="/css/responsive.css" rel="stylesheet" />
+
 </head>
 
-<body>
+<body class="sub_page">
 
-    <!-- header section strats -->
+    <div class="hero_area">
+
+        <!-- header section strats -->
         <header class="header_section">
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg custom_nav-container ">
@@ -81,45 +86,52 @@
         </div>
         </header>
         <!-- end header section -->
+    </div>
 
-    <main>
-        <br>
-        <h4>Carrito de compras</h4>
-        <div class="container" id="table-carrito">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Producto</th>
-                        <th scope="col">Cantidad</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody id="items">
+    <!-- contact section -->
 
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>Total:</th>
-                        <th id="total"></th>
-                        <th></th>
-                    </tr>
-                </tfoot>
-            </table>
-            <div class="text-center">
-                <a class="btn btn-secondary btn-lg" href="/tienda/tienda">Volver a la tienda</a>
-                
-                <a id="terminarCompra" class="btn btn-primary btn-lg" href="/tienda/checkout">Terminar compra</a>
+    <section class="contact_section layout_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <div class="heading_container">
+                        <h2> Gracias por tu compra, {{name}}</h2> <br> <br>
+                    </div>
+                    <div class="body_container">
+                        <h3> Detalles del pedido</h3>
+                        <h5>Numero de pedido: {{id_orden}}</h5>
+                        <table class="table">
+                            <thead>
+                                <th>Imagen</th>
+                                <th>Nombre</th>
+                                <th>Cantidad</th>
+                                <th>Total</th>
+                            </thead>
+                            {{#each productos}}
+                            <tbody>
+                                <th> <img src="{{imagen}}"> </th>
+                                <th>{{nombre}}</th>
+                                <th>{{cantidad}}</th>
+                                <th>{{total}}</th>
+                            </tbody>
+                            {{/each}}
+
+                            <tfoot>
+                                <th></th>
+                                <th></th>
+                                <th>Total:</th>
+                                <th>{{total}}</th>
+                            </tfoot>
+                        </table>                        
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="container text-center" id="carritoVacio"></div>
+    </section>
 
-    </main>
+    <!-- end contact section -->
+
+    <!-- footer section -->
     <footer class="footer_section">
         <div class="container">
             <div class="row">
@@ -214,9 +226,7 @@
     <!-- Google Map -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
     <!-- End Google Map -->
+
 </body>
-
-
-<script type="module" src="/js/cart.js"></script>
 
 </html>

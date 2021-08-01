@@ -1,3 +1,5 @@
+const { Usuario } = require('../models/Usuario');
+const jwt = require('jsonwebtoken')
 const { Categoria } = require('../models/Categoria');
 const { Producto, getProductosDisponibles } = require('../models/Producto')
 
@@ -149,6 +151,19 @@ const productoBorrar = async(req, res) => {
     }
 }
 
+/* Funcion que redirige segun el usuario logeado */
+const redirectType = async(req, res) => {
+    const token2 = req.cookies.token;
+    const { uid } = jwt.verify(token2, 'secretkey')
+    const usuario = await Usuario.findOne({ where: { id_unico: uid } })
+    let tipo = usuario.dataValues.tipo_usuario;
+    if(tipo === 'admin') {
+        res.redirect('/tienda/admin')
+    } else {
+        res.redirect('/tienda/user')
+    }
+}
+
 
 module.exports = {
     createProducto,
@@ -162,5 +177,7 @@ module.exports = {
     productoPost,
     productosGet,
     productoPut,
-    productoBorrar
+    productoBorrar,
+
+    redirectType
 }

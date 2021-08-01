@@ -61,9 +61,15 @@
                         </li>
                     </ul>
                     <div class="user_option-box">
-                        <a href="/tienda/login">
-                            <i class="far fa-user"></i>
-                        </a>
+                        {{#if loged}}
+                            <a href="/tienda/user-main">
+                                <i class="far fa-user"></i>
+                            </a>
+                        {{else}}
+                            <a href="/tienda/login">
+                                <i class="far fa-user"></i>
+                            </a>
+                        {{/if}}
                         <a id="carrito" href="/tienda/carrito">
                             <i class="fas fa-shopping-cart"></i>
                         </a>

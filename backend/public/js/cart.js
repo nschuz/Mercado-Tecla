@@ -73,6 +73,10 @@ function carritoVacio() {
     carritoVacio.appendChild(volver);
 }
 
+document.getElementById('terminarCompra').addEventListener('click', function () {
+    document.cookie = "productos = " + localStorage.getItem('productos') + "; max-age=30";
+})
+
 document.addEventListener('DOMContentLoaded', e => {
     pintarCarrito();
 });

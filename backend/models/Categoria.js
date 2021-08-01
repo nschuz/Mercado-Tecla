@@ -15,8 +15,8 @@ const Categoria = sequelize.define('categoria', {
     updatedAt: Sequelize.DATE
 });
 
-Categoria.sync().then(() => {
-    console.log('table created');
-});
+// Categoria.sync().then(() => {
+//     console.log('table created');
+// });
 
 module.exports = { Categoria }

@@ -15,7 +15,8 @@ const {
     productoPost,
     productosGet,
     productoPut,
-    productoBorrar
+    productoBorrar,
+    redirectType
 } = require('../controllers/admin.controller');
 
 const { validarJWT } = require('../middlewares/validarJWT');
@@ -59,8 +60,14 @@ router.delete('/productos/:id', [
 
 
 /* Rutas para las vista de gestion de productos */
-router.get('/admin/add-producto', renderAddProducto) //Ruta que renderiza la opcion de agregar un producto.
-router.get('/admin/productos/edit', renderEditProducto) //Ruta donde se renderiza la opcion de editar un producto.
+router.get('/admin/add-producto', [
+    validarJWT,
+    validarRol
+], renderAddProducto) //Ruta que renderiza la opcion de agregar un producto.
+router.get('/admin/productos/edit', [
+    validarJWT,
+    validarRol
+], renderEditProducto) //Ruta donde se renderiza la opcion de editar un producto.
 
 // Crear un nuevo producto
 router.post('/admin/productos', [
@@ -70,11 +77,16 @@ router.post('/admin/productos', [
     check('cantidad', "Verificar la cantidad").not().isEmpty().isInt(),
     check('imagen', "Es necesaria la imagen").not().isEmpty(),
     check('categoria', "Es necesaria la categoria").not().isEmpty(),
-    validarCampos
+    validarCampos,
+    validarJWT,
+    validarRol,
 ], productoPost);
 
 //Leer productos
-router.get('/admin/productos', productosGet); // Muestra al admin los productos que hay en la db.
+router.get('/admin/productos',[
+    validarJWT,
+    validarRol
+], productosGet); // Muestra al admin los productos que hay en la db.
 
 //Actualizar un producto(Usaremos POST de momento)
 router.post('/admin/productos/edit/:id', [
@@ -84,10 +96,17 @@ router.post('/admin/productos/edit/:id', [
     check('cantidad', "Verificar la cantidad").not().isEmpty().isInt(),
     check('imagen', "Es necesaria la imagen").not().isEmpty(),
     check('categoria', "Es necesaria la categoria").not().isEmpty(),
-    validarCampos
+    validarCampos,
+    validarJWT,
+    validarRol
 ], productoPut);
 
 //Eliminar un product (No METHOD)
-router.get('/admin/productos/eliminar/:id', productoBorrar);
+router.get('/admin/productos/eliminar/:id', [
+    validarJWT,
+    validarRol
+],productoBorrar);
+
+router.get('/user-main', redirectType);
 
 module.exports = router;
