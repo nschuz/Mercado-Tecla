@@ -1,4 +1,4 @@
-import { carrito } from "./models/Carrito.js";
+import { carrito } from "./Carrito.js";
 import { Busqueda } from "./searchProducts.js"
 
 
@@ -21,8 +21,8 @@ const boton = document.querySelector('#boton')
 
 
 
-
-
+console.log("object");
+alert("hola");
 
 
 //consultamos las 10 tendencias y las categorias
