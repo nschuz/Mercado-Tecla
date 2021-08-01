@@ -89,11 +89,12 @@
     </div>
 
 <div class="container" >
-        <h2>Hola ADMIN: {{nombre}} </h2>
 
+            <h2>Hola ADMIN: {{nombre}} </h2>
 <div class="btn-toolbar">
-<button class="btn btn-primary">Boton para usar en algo futuro :V</button>
+<button class="btn btn-primary" id="cerrarSesion">Cerrar Sesion</button>
 </div>
+
 <div class="well">
     <table class="table">
       <thead>
@@ -123,20 +124,72 @@
     </table>
 </div>
 
-<div class="modal small hide fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Delete Confirmation</h3>
+<div class="modal hide" tabindex="-1" role="dialog" id="myModal2">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Eliminar Cuenta</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Desea Eliminar la cuenta.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="borrar">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
     </div>
-    <div class="modal-body">
-        <p class="error-text">Are you sure you want to delete the user?</p>
-    </div>
-    <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-        <button class="btn btn-danger" data-dismiss="modal">Delete</button>
-    </div>
+  </div>
 </div>
+
+<div class="modal hide" tabindex="-1" role="dialog" id="myModal3">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modificar Usuario</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email</label>
+    <input type="email" class="form-control" id="inputemail" aria-describedby="emailHelp" placeholder="Inserta email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="inputpassword" placeholder= "Inserta Password">
+  </div>
+ 
+
+<div class="form-group">
+    <label for="exampleInputEmail1">Nombre</label>
+    <input type="text" class="form-control" id="inputnombre" aria-describedby="emailHelp" placeholder="Inserta Nombre">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Apellido</label>
+    <input type="text" class="form-control" id="inputapellido" placeholder="Inserta Apellido">
+  </div>
+ 
+  <div class="form-group">
+    <label for="exampleInputPassword1">Estado</label>
+    <input type="text" class="form-control" id="inputestado" placeholder="true o false">
+  </div>
+
+</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" id="modificar">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
+
+
 
  
 
