@@ -10,7 +10,7 @@ const jwt = require('jsonwebtoken')
 
 let productosJson;
 
-const preRenderCheck = async (req, res, next) => {
+const preRenderCheck = async(req, res, next) => {
     try {
         if (req.cookies.token) {
             const token2 = req.cookies.token;
@@ -18,7 +18,7 @@ const preRenderCheck = async (req, res, next) => {
             productos = req.cookies.productos;
             productosJson = JSON.parse(productos);
             await agregarProductos(productosJson);
-            await addFromCookies(productosJson, uid);            
+            await addFromCookies(productosJson, uid);
         }
         next();
     } catch (e) {
@@ -26,7 +26,8 @@ const preRenderCheck = async (req, res, next) => {
     }
 }
 
-const renderCheckout = async (req, res) => {
+const renderCheckout = async(req, res) => {
+
     try {
         if (req.cookies.token) {
             const token2 = req.cookies.token;
@@ -42,18 +43,18 @@ const renderCheckout = async (req, res) => {
             itemsCarrito[0].forEach(element => {
                 total += (element.total)
             });
-            res.render('checkout', { nombreUsuario: nombre, apellido, productos: itemsCarrito[0], total});
-        }
-        else {
+            res.render('checkout', { nombreUsuario: nombre, apellido, productos: itemsCarrito[0], total });
+            delete itemsCarrito;
+        } else {
             res.redirect('/tienda/login')
-        }   
+        }
     } catch (e) {
         res.status(400).json('No se pudo procesar tu solicitud :' + e);
     }
 }
 
-const postDireccion = async (req, res) => {
-    const data = req.body; 
+const postDireccion = async(req, res) => {
+    const data = req.body;
     // const productos = req.cookies.productos;
     // productosJson = JSON.parse(productos);
     const id_direccion = uuidv4();
@@ -64,13 +65,13 @@ const postDireccion = async (req, res) => {
     try {
         const token2 = req.cookies.token;
         const { uid } = jwt.verify(token2, 'secretkey')
-        await agregarDireccion(id_direccion, data, uid,)
+        await agregarDireccion(id_direccion, data, uid, )
         generarCobro(id_pago, data, uid);
         generarOrden(id_orden, uid, id_pago, id_direccion);
         generaDetalleOrden(id_orden, productosJson)
-        //funcion limpie el carrito
+            //funcion limpie el carrito
         res.redirect('/tienda/compra-exitosa?=id' + id_orden + '')
-        res.status(200).json("Id dreccion: " + id_direccion)
+            // res.status(200).json("Id dreccion: " + id_direccion)
     } catch (err) {
         res.status(400).json(err)
     }
@@ -82,12 +83,14 @@ const renderCompraExitosa = async(req, res) => {
     try {
         const productos = await getDetalleOrden(id_orden);
         const cliente = await getCliente(id_orden);
+        console.log(cliente);
         const name = cliente[0][0].nombre
         productos[0].forEach(element => {
             totalCompra += element.total;
         });
 
         console.log(cliente[0][0]);
+
         res.render('productos/compra-exitosa', { name, id_orden, productos: productos[0], total: totalCompra });
     } catch (err) {
         res.status(400).json('No se pudo procesar tu solicitud ' + err)

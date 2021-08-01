@@ -240,11 +240,17 @@ const userGet = async(req, res) => {
     const { uid } = jwt.verify(token2, 'secretkey')
     const usuario = await Usuario.findOne({ where: { id_unico: uid } })
     let nombre = usuario.dataValues.nombre;
+    let apellido = usuario.dataValues.apellido;
+    let email = usuario.dataValues.email
+    let rol = usuario.dataValues.tipo_usuario
     nombre = nombre.toUpperCase();
 
 
     res.render('user', {
-        nombre
+        nombre,
+        apellido,
+        email,
+        rol,
     })
 }
 

@@ -21,8 +21,7 @@ const boton = document.querySelector('#boton')
 
 
 
-console.log("object");
-alert("hola");
+
 
 
 //consultamos las 10 tendencias y las categorias

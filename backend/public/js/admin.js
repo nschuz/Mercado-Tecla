@@ -3,7 +3,8 @@ const btnSesion = document.querySelector('#cerrarSesion');
 const btnBorrar = document.querySelector('#borrar');
 const modal2 = document.querySelector('#myModal2');
 const btnPut = document.querySelector('#modificar');
-
+const alertanav = document.querySelector('#alerta');
+const alertanavUpdate = document.querySelector('#alertaupdate');
 
 document.addEventListener('DOMContentLoaded', async() => {
     //https://teclanode.azurewebsites.net/tienda/admin/registros
@@ -24,6 +25,8 @@ document.addEventListener('DOMContentLoaded', async() => {
                 console.log(`Borrando ${email}`);
                 borrarUsuario(email);
                 // modal2.classList = 'hide'
+                alertanav.appendChild(alerta("Usuario eliminado"));
+                window.location.reload();
             })
 
         })
@@ -56,7 +59,9 @@ document.addEventListener('DOMContentLoaded', async() => {
                     //JSON.stringify({ nombre: nombre, apellido: apellido, email: email }),
                 });
                 const data = await response.json();
-                console.log(data);
+                alertanavUpdate.appendChild(alerta("Usuario  modificado"));
+                window.location.reload();
+
             })
         })
 
@@ -101,6 +106,13 @@ async function consultarUsuarios(url) {
     const deletebtn = document.querySelectorAll('.email');
     console.log(tbody);
     console.log(deletebtn)
+}
+
+function alerta(mensaje) {
+    const divAlert = document.createElement('div');
+    divAlert.classList = 'alert alert-success'
+    divAlert.innerHTML = mensaje
+    return divAlert;
 }
 
 function crearFila(id_cliente, nombre, apellido, email, password, activo) {

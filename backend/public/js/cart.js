@@ -67,7 +67,7 @@ function carritoVacio() {
     tabla.innerHTML = '';
     carritoVacio.innerHTML = 'Carrito vacio, aun o has agregado productos :c '
     volver.innerHTML = 'Volver a la tienda'
-    volver.setAttribute('href', 'categorias.html')
+    volver.setAttribute('href', '/tienda/tienda')
     volver.className = 'btn btn-secondary btn-lg'
     carritoVacio.appendChild(br);
     carritoVacio.appendChild(volver);
