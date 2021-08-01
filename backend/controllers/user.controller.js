@@ -52,6 +52,7 @@ const renderCheckout = async(req, res) => {
             });
             res.render('checkout', { nombreUsuario: nombre, apellido, productos: itemsCarrito[0], total });
             delete itemsCarrito;
+
         } else {
             res.redirect('/tienda/login')
         }
@@ -97,6 +98,9 @@ const renderCompraExitosa = async(req, res) => {
             totalCompra += element.total;
         });
         res.render('productos/compra-exitosa', { name, id_orden, productos: productos[0], total: totalCompra });
+        delete productos;
+        //delete cliente;
+        console.log("hola");
     } catch (err) {
         res.status(400).json('No se pudo procesar tu solicitud ' + err)
     }
