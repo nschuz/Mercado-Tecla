@@ -54,7 +54,7 @@ function insertarProducto(title, price, thumbnail) {
     divPadre.appendChild(divbox);
 
     const producto = document.createElement('a');
-    producto.setAttribute('href', '/public/tienda')
+    producto.setAttribute('href', '/tienda/tienda')
     divbox.appendChild(producto);
 
     const divimg = document.createElement('div');

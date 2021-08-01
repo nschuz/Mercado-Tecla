@@ -1,5 +1,5 @@
 import { Producto } from "./Producto.js";
-import { pintarCarrito } from "../cart.js";
+import { pintarCarrito } from "./cart.js";
 
 class Carrito {
     constructor(usuario, productos) {
