@@ -85,7 +85,7 @@
         <h2 style="text-align: center;">Checkout</h2>
         <div class="row">
             <div class="col-md-6">
-                 <form method="post" action="/tienda/checkout/direccion" >
+                 <form name="datosCompra" method="post" action="/tienda/checkout/direccion" id="datosCompra" >
                     <div class="form-group">
                         <!-- Nombre del cliente -->
                         <h3>Nombre: {{nombreUsuario}} {{apellido}} </h3>
@@ -97,25 +97,25 @@
                         <div class="form-group">
                             <!-- Street 1 -->
                             <label for="calle" class="control-label">Calle Y Numero</label>
-                            <input type="text" class="form-control" id="calle" name="calle" placeholder="Juarez #5">
+                            <input type="text" class="form-control" id="calle" name="calle" placeholder="Juarez #5" required>
                         </div>
 
                         <div class="form-group">
                             <!-- City-->
                             <label for="colonia" class="control-label">Colonia</label>
-                            <input type="text" class="form-control" id="colonia" name="colonia" placeholder="Napoles">
+                            <input type="text" class="form-control" id="colonia" name="colonia" placeholder="Napoles" required>
                         </div>
 
                         <div class="form-group">
                             <!-- Nunicipio-->
                             <label for="municipio" class="control-label">Municipio</label>
-                            <input type="text" class="form-control" id="municipio" name="municipio" placeholder="Benito Juarez">
+                            <input type="text" class="form-control" id="municipio" name="municipio" placeholder="Benito Juarez" required>
                         </div>
 
                         <div class="form-group">
                             <!-- State-->
                             <label for="city_id" class="control-label">Estado</label>
-                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Ciudad De Mexico">
+                            <input type="text" class="form-control" id="estado" name="estado" placeholder="Ciudad De Mexico" required>
                         </div>
                     </div>
 
@@ -127,7 +127,7 @@
                             <input type="number" class="form-control" id="numTarjeta" name="numTarjeta" placeholder="0000 0000 0000 0000">
                             <div class="fieldset-expiration" style="display: flex">
                                 <select name="mesExpiracion" id="mesExpiracion" class="form-select">
-                                    <option value="Mes">Mes</option>
+                                    <option value="mes">Mes</option>
                                     <option value="01">01</option>
                                     <option value="02">02</option>
                                     <option value="03">03</option>
@@ -142,7 +142,7 @@
                                     <option value="12">12</option>
                                 </select>
                                 <select name="anioExpiracion" id="anioExpiracion" class="form-select">
-                                    <option value="Anio">Año</option>
+                                    <option value="anio">Año</option>
                                     <option value="2021">2021</option>
                                     <option value="2022">2022</option>
                                     <option value="2023">2023</option>
@@ -158,7 +158,7 @@
 
                     <div class="form-group">
                         <!-- Submit Button -->
-                        <button type="submit" class="btn btn-primary">Comprar!</button>
+                        <button id="botonCompra" type="submit" class="btn btn-primary">Comprar!</button>
                         <a href="/tienda/carrito" type="submit" class="btn btn-danger">Regresar al carrito</a>
                     </div>
 
@@ -272,6 +272,7 @@
     </footer>
     </footer>
     <script type="module" src="/js/chechout.js"></script>
+    <script src="/js/validacion.js"></script>
 </body>
 
 </html>

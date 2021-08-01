@@ -52,13 +52,17 @@ const addFromCookies = async (productos, uid) => {
     }
 }
 
-const obtenerItems = async (user) => {
-    const items = await db.query(`SELECT imagen, nombre, dbo.carritos.cantidad AS cantidad, precio, total FROM dbo.productos, dbo.carritos WHERE dbo.carritos.id_cliente = '${user}' AND dbo.carritos.id_producto = dbo.productos.id_producto`);
+const obtenerItems = (user) => {
+    const items =  db.query(`SELECT imagen, nombre, dbo.carritos.cantidad AS cantidad, precio, total FROM dbo.productos, dbo.carritos WHERE dbo.carritos.id_cliente = '${user}' AND dbo.carritos.id_producto = dbo.productos.id_producto`);
     return items;
+}
+
+const limpiarCarrito = (id_cliente) => {
+    Carrito.destroy({ where: { id_cliente }});
 }
 
 // Carrito.sync().then(() => {
 //     console.log('table created');
 // });
 
-module.exports = { Carrito, obtenerItems, addFromCookies }
+module.exports = { Carrito, obtenerItems, addFromCookies, limpiarCarrito }
