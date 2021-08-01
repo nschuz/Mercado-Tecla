@@ -8,14 +8,14 @@ const btn = document.querySelector('#search-btn');
 
 //Endpoints
 //Endpoint te regresa 50 tendencias
-const URL_TENDENCIAS = `https://api-mercado-tecla.herokuapp.com/api/tendencias`;
+const URL_TENDENCIAS = `https://teclanode.azurewebsites.net/api/tendencias`;
 //Te regresa todas la categorias de mercado libre
 //`https://api.mercadolibre.com/sites/MLM/categories`
-const URL_CATEGORIAS = `https://api-mercado-tecla.herokuapp.com/api/categorias`
+const URL_CATEGORIAS = `https://teclanode.azurewebsites.net/api/categorias`
     //Te regresa los productos dependiendo la categoria 
     //https://api-mercado-tecla.herokuapp.com/api/productos-categoria/
     //`https://api.mercadolibre.com/sites/MLM/search?category=`
-const URL_PRODUCTOS = `https://api-mercado-tecla.herokuapp.com/api/productos-categoria/`;
+const URL_PRODUCTOS = `https://teclanode.azurewebsites.net/api/productos-categoria/`;
 
 const boton = document.querySelector('#boton')
 

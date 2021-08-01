@@ -1,10 +1,14 @@
-const { response, request } = require('express')
 const { Contacto } = require('../models/contacto');
 const { Usuario } = require('../models/Usuario');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const { crearJWT } = require('../services/crearJWT.service');
 const jwt = require('jsonwebtoken')
+<<<<<<< HEAD
+=======
+const nodemailer = require("nodemailer");
+const { generatePassword } = require('../services/generatePassword.service');
+>>>>>>> ebbb207600b1145eab61af570feaccb34558b797
 
 const aboutGet = (req, res) => {
     res.render('about')
@@ -103,7 +107,7 @@ const contacto2Get = async(req, res) => {
     }
 }
 
-/*Controles registro usuario */
+/******Controles registro usuario *******/
 //Insertamos un usuario a la base de datos
 const registroPost = async(req, res) => {
     const { nombre, apellido, email, password, date } = req.body;
@@ -192,6 +196,7 @@ const usuariosGet = async(req, res) => {
 
 }
 
+
 /* Controladores Login*/
 const loginPost = async(req, res) => {
     const { email, password } = req.body;
@@ -248,7 +253,67 @@ const userGet = async(req, res) => {
     })
 }
 
+const olvidepasswordPost = async(req, res) => {
 
+<<<<<<< HEAD
+=======
+    const { email } = req.body;
+
+
+    const usuario = await Usuario.findOne({ where: { email } });
+    if (!usuario) {
+        return res.status(400).json('Usuario/Password erroneo')
+    }
+
+    const password = generatePassword();
+    //ciframos la contraseña
+    const passHas = await bcrypt.hash(password, 10);
+
+    try {
+
+        usuario.update({ password: passHas }, { where: { email } });
+
+        let testAccount = await nodemailer.createTestAccount();
+        let transporter = nodemailer.createTransport({
+            host: "smtp.ionos.mx",
+            port: 587,
+            secure: false,
+            auth: {
+                user: 'chuz.regis@proyectocifrado.com',
+                pass: 'Anytime0730',
+            },
+        });
+        let info = await transporter.sendMail({
+            from: '"Tecla Mercado" <chuz.regis@proyectocifrado.com>', // sender address
+            to: email, // list of receivers
+            subject: "🚨🚨Nuevo password🚨🚨",
+            text: `Restablecer Password`,
+            html: `<p>Tu nuevo password: </p> <br/>
+                  <p>${password}</p> <br/>
+                  <img src="https://img.icons8.com/ios/452/password--v1.png">`,
+
+        });
+
+        res.status(200).json("datos actaulizados");
+
+    } catch (e) {
+        res.status(400).json('No se pudo procesar tu solicitud');
+        console.log(e);
+    }
+
+
+
+
+
+
+
+    //  console.log("Message sent: %s", info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    //  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+}
+
+>>>>>>> ebbb207600b1145eab61af570feaccb34558b797
 module.exports = {
     aboutGet,
     homeGet,
@@ -270,6 +335,6 @@ module.exports = {
     usuariosGet,
     loginPost,
     adminGet,
-    userGet
-
+    userGet,
+    olvidepasswordPost
 }

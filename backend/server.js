@@ -25,7 +25,7 @@ class Server {
         this.middlewares();
 
 
-        //Rutas de mi apliccion
+        //Rutas de mi apliccion sd
         this.routes()
 
         this.conectarDB();
@@ -63,8 +63,8 @@ class Server {
 
         this.app.use(morgan('combined'))
 
-         //CookieParser
-         this.app.use(cookieParser());
+        //CookieParser
+        this.app.use(cookieParser());
 
     }
 
@@ -76,7 +76,7 @@ class Server {
         this.app.use(this.apiPath, require('./routes/api.routes'))
             //entra a nuestro public donde hacemos el render del html (a futuro)
         this.app.use(this.publicPath, require('./routes/tienda.routes'))
-        /* Rutas Del CRUD administrador */
+            /* Rutas Del CRUD administrador */
         this.app.use(this.publicPath, require('./routes/admin.routes'))
         /* Rutas para las categorias */
         this.app.use(this.publicPath, require('./routes/categorias.routes'))
