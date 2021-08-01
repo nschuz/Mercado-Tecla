@@ -2,7 +2,6 @@ const { Usuario } = require('../models/Usuario');
 const jwt = require('jsonwebtoken')
 const { Categoria } = require('../models/Categoria');
 const { Producto, getProductosDisponibles } = require('../models/Producto')
-const { Usuario } = require('../models/Usuario');
 const bcrypt = require('bcrypt');
 
 /* Funciones para la API */

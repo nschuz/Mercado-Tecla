@@ -4,11 +4,8 @@ const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const { crearJWT } = require('../services/crearJWT.service');
 const jwt = require('jsonwebtoken')
-<<<<<<< HEAD
-=======
 const nodemailer = require("nodemailer");
 const { generatePassword } = require('../services/generatePassword.service');
->>>>>>> ebbb207600b1145eab61af570feaccb34558b797
 
 let loged = false;
 
@@ -253,8 +250,6 @@ const userGet = async(req, res) => {
 
 const olvidepasswordPost = async(req, res) => {
 
-<<<<<<< HEAD
-=======
     const { email } = req.body;
 
 
@@ -311,7 +306,6 @@ const olvidepasswordPost = async(req, res) => {
 
 }
 
->>>>>>> ebbb207600b1145eab61af570feaccb34558b797
 module.exports = {
     aboutGet,
     homeGet,
