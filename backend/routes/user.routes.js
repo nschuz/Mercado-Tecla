@@ -9,7 +9,8 @@ const {
     renderCompraExitosa
 } = require('../controllers/user.controller');
 
-router.get('/checkout',preRenderCheck, renderCheckout);
+router.get('/buy', preRenderCheck);
+router.get('/checkout', renderCheckout);
 router.post('/checkout/direccion', postDireccion);
 router.get('/compra-exitosa', renderCompraExitosa);
 

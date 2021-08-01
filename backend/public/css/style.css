@@ -13,6 +13,14 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.col-md-6 .table th img {
+  height: 75px;
+}
+
+.imagenTabla{
+  height: 75px;
+}
+
 .form-select{
   border-radius: 5px;
   padding: 5px;
