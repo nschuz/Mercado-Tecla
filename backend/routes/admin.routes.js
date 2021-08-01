@@ -15,11 +15,16 @@ const {
     productoPost,
     productosGet,
     productoPut,
-    productoBorrar
+    productoBorrar,
+    registroEmailDelete,
+    updateUserPut
 } = require('../controllers/admin.controller');
 
 const { validarJWT } = require('../middlewares/validarJWT');
 const { validarRol } = require('../middlewares/validarRol');
+const { route } = require('./api.routes');
+const { registroDelete } = require('../controllers/tienda.controller');
+const { idExiste, emailNoExiste } = require('../services/db_validaciones.service');
 
 /* Rutas para la api */
 
@@ -59,8 +64,14 @@ router.delete('/productos/:id', [
 
 
 /* Rutas para las vista de gestion de productos */
-router.get('/admin/add-producto', renderAddProducto) //Ruta que renderiza la opcion de agregar un producto.
-router.get('/admin/productos/edit', renderEditProducto) //Ruta donde se renderiza la opcion de editar un producto.
+router.get('/admin/add-producto', [
+        validarJWT,
+        validarRol
+    ], renderAddProducto) //Ruta que renderiza la opcion de agregar un producto.
+router.get('/admin/productos/edit', [
+        validarJWT,
+        validarRol
+    ], renderEditProducto) //Ruta donde se renderiza la opcion de editar un producto.
 
 // Crear un nuevo producto
 router.post('/admin/productos', [
@@ -74,7 +85,10 @@ router.post('/admin/productos', [
 ], productoPost);
 
 //Leer productos
-router.get('/admin/productos', productosGet); // Muestra al admin los productos que hay en la db.
+router.get('/admin/productos', [
+    validarJWT,
+    validarRol
+], productosGet); // Muestra al admin los productos que hay en la db.
 
 //Actualizar un producto(Usaremos POST de momento)
 router.post('/admin/productos/edit/:id', [
@@ -89,5 +103,23 @@ router.post('/admin/productos/edit/:id', [
 
 //Eliminar un product (No METHOD)
 router.get('/admin/productos/eliminar/:id', productoBorrar);
+
+//DELETE USER BY EMAIl
+router.delete('/admin/delelete/:email', [
+    check('email').custom(emailNoExiste),
+    validarCampos,
+    validarJWT,
+    validarRol
+], registroEmailDelete)
+
+//UPDATE USER 
+router.put('/admin/update/:email', [
+    body('nombre', "El nombre no pude llevar numeros").not().isNumeric(),
+    body('apellido', "El apellido no pude llevar numeros").not().isNumeric(),
+    validarJWT,
+    validarRol
+], updateUserPut)
+
+
 
 module.exports = router;
