@@ -4,8 +4,11 @@ const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const { crearJWT } = require('../services/crearJWT.service');
 const jwt = require('jsonwebtoken')
+<<<<<<< HEAD
+=======
 const nodemailer = require("nodemailer");
 const { generatePassword } = require('../services/generatePassword.service');
+>>>>>>> ebbb207600b1145eab61af570feaccb34558b797
 
 let loged = false;
 
@@ -197,6 +200,8 @@ const loginPost = async(req, res) => {
     const { email, password } = req.body;
     //verificamos el correo exista 
     const usuario = await Usuario.findOne({ where: { email } });
+
+
     if (!usuario) {
         return res.status(400).json('Usuario/Password erroneo')
     }
@@ -212,12 +217,9 @@ const loginPost = async(req, res) => {
 
 
     const token = await crearJWT(usuario.dataValues.id_unico);
-
     const isAdmin = usuario.dataValues.tipo_usuario;
     loged = true;
     if (isAdmin == "admin") {
-        //res.cookie('acces-token', token, { path: '/admin' }).render('admin')
-        // res.cookie('token', token).redirect('/tienda/admin')
         res.cookie('token', token).redirect('/tienda/admin')
     } else {
         res.cookie('token', token).redirect('/tienda/user')
@@ -251,6 +253,8 @@ const userGet = async(req, res) => {
 
 const olvidepasswordPost = async(req, res) => {
 
+<<<<<<< HEAD
+=======
     const { email } = req.body;
 
 
@@ -288,7 +292,7 @@ const olvidepasswordPost = async(req, res) => {
 
         });
 
-        res.status(200).json("datos actaulizados");
+        res.status(200).json("Tu nuevo password fue enviado a tu email");
 
     } catch (e) {
         res.status(400).json('No se pudo procesar tu solicitud');
@@ -307,6 +311,7 @@ const olvidepasswordPost = async(req, res) => {
 
 }
 
+>>>>>>> ebbb207600b1145eab61af570feaccb34558b797
 module.exports = {
     aboutGet,
     homeGet,

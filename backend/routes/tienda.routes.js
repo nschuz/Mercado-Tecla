@@ -30,6 +30,9 @@ const {
 } = require('../controllers/tienda.controller');
 const { validarJWT } = require('../middlewares/validarJWT');
 const { validarRol } = require('../middlewares/validarRol');
+const { tokenActivo } = require('../middlewares/tokenActivo');
+
+
 
 router.get('/about', aboutGet);
 router.get('/home', homeGet);
@@ -37,7 +40,7 @@ router.get('/', redirectGet)
 router.get('/tienda', tiendaGet)
 router.get('/registro', registroGet)
 router.get('/restablecer-password', olvidepasswordGet)
-router.get('/login', loginGet);
+router.get('/login', tokenActivo, loginGet);
 router.get('/carrito', carritoGet)
 router.get('/contacto', contactoGet)
 
@@ -120,8 +123,7 @@ router.post('/login', [
     body('email', "Tu email no tiene formato de email").isEmail(),
     check('email', "El email  no existe en la base de datos").custom(emailNoExiste),
     body('password', "El campo password no debe estra vacio").not().isEmpty(),
-    validarCampos
-
+    validarCampos,
 ], loginPost);
 
 router.get('/admin', [
@@ -138,4 +140,5 @@ router.get('/user', [
 router.post('/restablecer-password', olvidepasswordPost)
 
 
+//router.get('*', homeGet);
 module.exports = router;

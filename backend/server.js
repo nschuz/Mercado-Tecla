@@ -78,7 +78,7 @@ class Server {
         this.app.use(this.publicPath, require('./routes/tienda.routes'))
             /* Rutas Del CRUD administrador */
         this.app.use(this.publicPath, require('./routes/admin.routes'))
-        /* Rutas para las categorias */
+            /* Rutas para las categorias */
         this.app.use(this.publicPath, require('./routes/categorias.routes'))
         /* Rutas para el usuario */
         this.app.use(this.publicPath, require('./routes/user.routes'))
