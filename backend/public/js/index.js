@@ -11,7 +11,7 @@ const btn = document.querySelector('#search-btn');
 const URL_TENDENCIAS = `https://teclanode.azurewebsites.net/api/tendencias`;
 //Te regresa todas la categorias de mercado libre
 //`https://api.mercadolibre.com/sites/MLM/categories`
-const URL_CATEGORIAS = `https://teclanode.azurewebsites.net/api/categorias`
+const URL_CATEGORIAS = `https://api.mercadolibre.com/trends/MLA`
     //Te regresa los productos dependiendo la categoria 
     //https://api-mercado-tecla.herokuapp.com/api/productos-categoria/
     //`https://api.mercadolibre.com/sites/MLM/search?category=`
