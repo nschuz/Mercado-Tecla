@@ -51,11 +51,21 @@ const passwordCorrecto = async(email = '', req) => {
 
 }
 
+const cuentaActiva = async(email = '') => {
+    //const emailExiste = await Contacto.findOne({ where: { email } });
+    const emailExiste = await Usuario.findOne({ where: { email } });
+
+    if (!emailExiste.dataValues.activo) {
+        throw new Error(`Su cuenta no esta ativa contacte al administador`);
+    }
+}
+
 
 
 module.exports = {
     emailExiste,
     emailNoExiste,
     idExiste,
-    passwordCorrecto
+    passwordCorrecto,
+    cuentaActiva
 }

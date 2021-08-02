@@ -8,7 +8,8 @@ const alertanavUpdate = document.querySelector('#alertaupdate');
 
 document.addEventListener('DOMContentLoaded', async() => {
     //https://teclanode.azurewebsites.net/tienda/admin/registros
-    await consultarUsuarios('https://teclanode.azurewebsites.net/tienda/admin/registros');
+    //http://localhost:8080
+    await consultarUsuarios('http://localhost:8080/tienda/admin/registros');
 
     btnSesion.addEventListener('click', function() {
         //document.cookie = 'token' + '=; Max-Age=-99999999;';
@@ -50,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async() => {
                 formData.append('password', password)
                 console.log(formData);
 
-                const response = await fetch('https://teclanode.azurewebsites.net/tienda/admin/update/' + email, {
+                const response = await fetch('http://localhost:8080/tienda/admin/update/' + email, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -74,7 +75,7 @@ document.addEventListener('DOMContentLoaded', async() => {
 const borrarUsuario = async(email) => {
     //admin/delelete/
 
-    const response = await fetch('https://teclanode.azurewebsites.net/tienda/admin/delelete/' + email, {
+    const response = await fetch('http://localhost:8080/tienda/admin/delelete/' + email, {
         method: 'DELETE',
     });
     const data = await response.json();

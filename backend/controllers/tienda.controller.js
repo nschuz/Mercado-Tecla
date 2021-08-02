@@ -270,9 +270,11 @@ const olvidepasswordPost = async(req, res) => {
 
     try {
 
-        usuario.update({ password: passHas }, { where: { email } });
 
+        usuario.update({ password: passHas }, { where: { email } });
+        console.log(email);
         let testAccount = await nodemailer.createTestAccount();
+
         let transporter = nodemailer.createTransport({
             host: "smtp.ionos.mx",
             port: 587,
@@ -288,8 +290,7 @@ const olvidepasswordPost = async(req, res) => {
             subject: "🚨🚨Nuevo password🚨🚨",
             text: `Restablecer Password`,
             html: `<p>Tu nuevo password: </p> <br/>
-                  <p>${password}</p> <br/>
-                  <img src="https://img.icons8.com/ios/452/password--v1.png">`,
+                  <p>${password}</p> <br/>`,
 
         });
 

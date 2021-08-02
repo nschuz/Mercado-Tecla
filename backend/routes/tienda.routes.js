@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { body, check } = require('express-validator');
 const { validarCampos } = require('../middlewares/sumaErrores')
-const { emailExiste, emailNoExiste, idExiste, passwordCorrecto } = require('../services/db_validaciones.service')
+const { emailExiste, emailNoExiste, idExiste, passwordCorrecto, cuentaActiva } = require('../services/db_validaciones.service')
 
 const router = Router();
 const {
@@ -123,7 +123,9 @@ router.post('/login', [
     body('email', "Tu email no tiene formato de email").isEmail(),
     check('email', "El email  no existe en la base de datos").custom(emailNoExiste),
     body('password', "El campo password no debe estra vacio").not().isEmpty(),
+    check('email', "Cuenta eliminada contacte al administador").custom(cuentaActiva),
     validarCampos,
+
 ], loginPost);
 
 router.get('/admin', [

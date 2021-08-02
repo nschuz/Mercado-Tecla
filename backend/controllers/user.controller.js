@@ -32,7 +32,7 @@ const preRenderCheck = async(req, res) => {
         }
         res.redirect('/tienda/checkout');
     } catch (e) {
-        res.redirect('/tienda/carrito');
+        res.redirect('/tienda/login');
     }
 }
 
@@ -64,8 +64,8 @@ const renderCheckout = async(req, res) => {
     }
 }
 
-const postPedido = async (req, res) => {
-    const data = req.body; 
+const postPedido = async(req, res) => {
+    const data = req.body;
     const id_direccion = uuidv4();
     const id_pago = uuidv4();
     const id_orden = uuidv4();
