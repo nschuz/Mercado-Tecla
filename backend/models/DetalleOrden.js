@@ -25,14 +25,14 @@ DetalleOrden.sync().then(() => {
 const generaDetalleOrden = (id_orden, productos) => {
     try {
         productos.forEach(element => {
-            DetalleOrden.create({ 
+            DetalleOrden.create({
                 id_orden,
                 id_producto: element.id,
                 cantidad: element.cantidad,
                 total: (element.cantidad * element.precio)
             })
         });
-    }catch(err) {
+    } catch (err) {
         throw new Error('No se genero el detalle de orden.')
     }
 }
@@ -48,16 +48,27 @@ const getDetalleOrden = (id_orden) => {
 
 const getCliente = (id_orden) => {
     try {
-        const cliente = sequelize.query(`SELECT nombre FROM dbo.ordens, dbo.usuarios WHERE dbo.ordens.id_orden = '${id_orden}' AND dbo.ordens.id_cliente = dbo.usuarios.id_unico` );
+        const cliente = sequelize.query(`SELECT nombre FROM dbo.ordens, dbo.usuarios WHERE dbo.ordens.id_orden = '${id_orden}' AND dbo.ordens.id_cliente = dbo.usuarios.id_unico`);
         return cliente;
     } catch (err) {
         throw new Error('Problema al consultar la db.')
     }
 }
 
+const getEmail = (id_orden) => {
+    try {
+        const email = sequelize.query(`SELECT email FROM dbo.ordens, dbo.usuarios WHERE dbo.ordens.id_orden = '${id_orden}' AND dbo.ordens.id_cliente = dbo.usuarios.id_unico`);
+        return email;
+    } catch (err) {
+        throw new Error('Problema al consultar la db.')
+    }
+}
+
+
 module.exports = {
     DetalleOrden,
     generaDetalleOrden,
     getDetalleOrden,
-    getCliente
+    getCliente,
+    getEmail,
 };

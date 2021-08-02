@@ -3,10 +3,13 @@ const { agregarDireccion } = require('../models/Direccion');
 const { obtenerItems, addFromCookies, limpiarCarrito } = require('../models/Carrito');
 const { agregarProductos } = require('../models/Producto');
 const { generarOrden } = require('../models/Orden');
-const { generaDetalleOrden, getDetalleOrden, getCliente } = require('../models/DetalleOrden');
+const { generaDetalleOrden, getDetalleOrden, getCliente, getEmail } = require('../models/DetalleOrden');
 const { v4: uuidv4 } = require('uuid');
 const { generarCobro } = require('../models/Pago');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const { emailConfirmacion } = require('../services/emailConfrimacion.service');
+const pdf = require('html-pdf');
+const { factura } = require('../services/generateFactura.service');
 
 if (typeof localStorage === "undefined" || localStorage === null) {
     let LocalStorage = require('node-localstorage').LocalStorage;
@@ -92,16 +95,28 @@ const renderCompraExitosa = async(req, res) => {
     try {
         const productos = await getDetalleOrden(id_orden);
         const cliente = await getCliente(id_orden);
+        const email = await getEmail(id_orden);
+
         console.log(cliente);
         const name = cliente[0][0].nombre
         productos[0].forEach(element => {
             totalCompra += element.total;
         });
+        const contenido = factura(name, id_orden, productos[0], totalCompra, email[0][0].email);
+        pdf.create(contenido).toFile(`./facturas/${email[0][0].email}.pdf`, function(err, res) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log(res);
+            }
+        });
+        await emailConfirmacion(email[0][0].email);
         res.render('productos/compra-exitosa', { name, id_orden, productos: productos[0], total: totalCompra });
         delete productos;
         //delete cliente;
         console.log("hola");
     } catch (err) {
+        console.log(err);
         res.status(400).json('No se pudo procesar tu solicitud ' + err)
     }
 }
