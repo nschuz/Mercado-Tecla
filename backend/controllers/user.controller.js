@@ -11,9 +11,9 @@ const jwt = require('jsonwebtoken')
 if (typeof localStorage === "undefined" || localStorage === null) {
     let LocalStorage = require('node-localstorage').LocalStorage;
     localStorage = new LocalStorage('./scratch');
-  }
+}
 
-const preRenderCheck = async (req, res) => {
+const preRenderCheck = async(req, res) => {
     productos = req.cookies.productos;
     localStorage.setItem('productos', productos);
 
@@ -25,7 +25,7 @@ const preRenderCheck = async (req, res) => {
             let productosJson = JSON.parse(productosLS);
             await limpiarCarrito(uid);
             await agregarProductos(productosJson);
-            await addFromCookies(productosJson, uid);            
+            await addFromCookies(productosJson, uid);
         }
         res.redirect('/tienda/checkout');
     } catch (e) {
@@ -33,7 +33,8 @@ const preRenderCheck = async (req, res) => {
     }
 }
 
-const renderCheckout = async (req, res) => {
+const renderCheckout = async(req, res) => {
+
     try {
         if (req.cookies.token) {
             const token2 = req.cookies.token;
@@ -49,11 +50,12 @@ const renderCheckout = async (req, res) => {
             itemsCarrito[0].forEach(element => {
                 total += (element.total)
             });
-            res.render('checkout', { nombreUsuario: nombre, apellido, productos: itemsCarrito[0], total});
-        }
-        else {
+            res.render('checkout', { nombreUsuario: nombre, apellido, productos: itemsCarrito[0], total });
+            delete itemsCarrito;
+
+        } else {
             res.redirect('/tienda/login')
-        }   
+        }
     } catch (e) {
         res.status(400).json('No se pudo procesar tu solicitud :' + e);
     }
@@ -71,7 +73,7 @@ const postPedido = async (req, res) => {
     try {
         const token2 = req.cookies.token;
         const { uid } = jwt.verify(token2, 'secretkey')
-        await agregarDireccion(id_direccion, data, uid,)
+        await agregarDireccion(id_direccion, data, uid, )
         generarCobro(id_pago, data, uid);
         generarOrden(id_orden, uid, id_pago, id_direccion);
         generaDetalleOrden(id_orden, productosJson);
@@ -85,16 +87,20 @@ const postPedido = async (req, res) => {
 
 const renderCompraExitosa = async(req, res) => {
     const id_orden = req.query.id
-    console.log('id orden: ',id_orden);
+    console.log('id orden: ', id_orden);
     let totalCompra = 0;
     try {
         const productos = await getDetalleOrden(id_orden);
         const cliente = await getCliente(id_orden);
+        console.log(cliente);
         const name = cliente[0][0].nombre
         productos[0].forEach(element => {
             totalCompra += element.total;
         });
         res.render('productos/compra-exitosa', { name, id_orden, productos: productos[0], total: totalCompra });
+        delete productos;
+        //delete cliente;
+        console.log("hola");
     } catch (err) {
         res.status(400).json('No se pudo procesar tu solicitud ' + err)
     }
