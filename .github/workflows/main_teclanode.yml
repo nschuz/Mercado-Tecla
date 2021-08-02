@@ -52,5 +52,5 @@ jobs:
       with:
         app-name: 'teclanode'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_86a910cce337458eb709764da43f9fb2 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_e4c115d1f0b24465898687730f6e1ae0 }}
         package: .
