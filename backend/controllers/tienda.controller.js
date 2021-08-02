@@ -283,6 +283,10 @@ const olvidepasswordPost = async(req, res) => {
                 user: 'chuz.regis@proyectocifrado.com',
                 pass: 'Anytime0730',
             },
+            tls: {
+                // do not fail on invalid certs
+                rejectUnauthorized: false
+            },
         });
         let info = await transporter.sendMail({
             from: '"Tecla Mercado" <chuz.regis@proyectocifrado.com>', // sender address

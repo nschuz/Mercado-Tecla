@@ -102,7 +102,7 @@ const renderCompraExitosa = async(req, res) => {
         productos[0].forEach(element => {
             totalCompra += element.total;
         });
-        const contenido = factura(name, id_orden, productos[0], totalCompra, email[0][0].email);
+        const contenido = await factura(name, id_orden, productos[0], totalCompra, email[0][0].email);
         pdf.create(contenido).toFile(`./facturas/${email[0][0].email}.pdf`, function(err, res) {
             if (err) {
                 console.log(err);
