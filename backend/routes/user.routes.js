@@ -5,13 +5,13 @@ const router = Router();
 const {
     renderCheckout,
     preRenderCheck,
-    postDireccion,
+    postPedido,
     renderCompraExitosa
 } = require('../controllers/user.controller');
 
 router.get('/buy', preRenderCheck);
 router.get('/checkout', renderCheckout);
-router.post('/checkout/direccion', postDireccion);
+router.post('/checkout/direccion', postPedido);
 router.get('/compra-exitosa', renderCompraExitosa);
 
 
