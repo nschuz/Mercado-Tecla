@@ -23,13 +23,9 @@ class Server {
         //Middlewares
         //Funaciones que añaden funcionalidad
         this.middlewares();
-
-
         //Rutas de mi apliccion sd
         this.routes()
-
         this.conectarDB();
-
     }
 
     async conectarDB() {
@@ -53,19 +49,14 @@ class Server {
 
         //Middleware Public
         this.app.use(express.static(path.join(__dirname, 'public')))
-
-        //un middlware para recibir un json den el header - Lectura y parseo del body
+            //un middlware para recibir un json den el header - Lectura y parseo del body
         this.app.use(express.json())
         this.app.use(express.urlencoded({ extended: true }));
-
         //express-rate-limit
         this.app.use(apiLimiter)
-
         this.app.use(morgan('combined'))
-
-        //CookieParser
+            //CookieParser
         this.app.use(cookieParser());
-
     }
 
 
@@ -80,7 +71,7 @@ class Server {
         this.app.use(this.publicPath, require('./routes/admin.routes'))
             /* Rutas para las categorias */
         this.app.use(this.publicPath, require('./routes/categorias.routes'))
-        /* Rutas para el usuario */
+            /* Rutas para el usuario */
         this.app.use(this.publicPath, require('./routes/user.routes'))
     }
 
