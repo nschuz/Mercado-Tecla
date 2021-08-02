@@ -1,7 +1,7 @@
 const { Usuario } = require('../models/Usuario');
-const { Direccion, agregarDireccion } = require('../models/Direccion');
-const { Carrito, obtenerItems, addFromCookies, limpiarCarrito } = require('../models/Carrito');
-const { Producto, agregarProductos } = require('../models/Producto');
+const { agregarDireccion } = require('../models/Direccion');
+const { obtenerItems, addFromCookies, limpiarCarrito } = require('../models/Carrito');
+const { agregarProductos } = require('../models/Producto');
 const { generarOrden } = require('../models/Orden');
 const { generaDetalleOrden, getDetalleOrden, getCliente, getEmail } = require('../models/DetalleOrden');
 const { v4: uuidv4 } = require('uuid');
@@ -64,8 +64,8 @@ const renderCheckout = async(req, res) => {
     }
 }
 
-const postDireccion = async(req, res) => {
-    const data = req.body;
+const postPedido = async (req, res) => {
+    const data = req.body; 
     const id_direccion = uuidv4();
     const id_pago = uuidv4();
     const id_orden = uuidv4();
@@ -124,6 +124,6 @@ const renderCompraExitosa = async(req, res) => {
 module.exports = {
     preRenderCheck,
     renderCheckout,
-    postDireccion,
+    postPedido,
     renderCompraExitosa
 }
