@@ -19,7 +19,7 @@ try {
     //     }
     // });
 
-    sequelize = new Sequelize('tecla', 'teclaadmin', 'root123$', {
+    sequelize = new Sequelize('TeclaMercado', 'teclaadmin', 'root123$', {
         //host: process.env.HOST,
         host: 'tecla.database.windows.net',
         dialect: 'mssql',

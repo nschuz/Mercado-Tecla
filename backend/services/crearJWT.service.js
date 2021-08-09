@@ -18,10 +18,6 @@ const crearJWT = (uid = '') => {
             }
 
         })
-
-
-
-
     })
 }
 
