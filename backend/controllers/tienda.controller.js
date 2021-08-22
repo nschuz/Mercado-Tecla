@@ -148,7 +148,7 @@ const registroPut = async(req, res) => {
     try {
         const passHas = await bcrypt.hash(password, 10);
         Usuario.update({ nombre, apellido, email, password: passHas }, { where: { id_unico: id } });
-        res.status(200).json("Datos actaulizados");
+        res.status(200).json("ok");
     } catch (e) {
         res.status(400).json('No se pudo procesar tu solicitud');
         console.log(e);
